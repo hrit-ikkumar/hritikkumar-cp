@@ -1,13 +1,12 @@
 // @hritikkumar
-
 #include<bits/stdc++.h> // all header files
-
 using namespace std; //namespace created as std
 
-int main(void) // main function return type is int and input parameter is void (empty)
+int main(void)
 {
-	// solution comes here
+	ios::sync_with_stdio(0);
+	cin.tie(0);
+	// makes the execution faster
 	
 	return 0; //return type is int
 }
- 
