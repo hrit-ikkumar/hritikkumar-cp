@@ -10,3 +10,4 @@ int main(void)
 	
 	return 0; //return type is int
 }
+// speed ups the program
