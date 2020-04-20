@@ -1,5 +1,3 @@
-S: hrijtkaj
-S: kajfajfia
-S: kdjfa;fja
-S: ifjakfjakfja
-S: fakjkaf
+0
+1.09000000000000007994
+-1486618624
