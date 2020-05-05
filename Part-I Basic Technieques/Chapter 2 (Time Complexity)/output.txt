@@ -1,2 +1,1 @@
-Let's se how many iterations are possible in each time complesity
-Total time for O(n) where n is 10^7: 5e-06
+Total Time Used: 0
