@@ -12,12 +12,12 @@ int main(void)
 	#endif
 	
 	//Code Goes Here
-	int iterations = 1e8;
+	long long int iterations = 1e18;
 	while(iterations--);
 	
 	#ifndef ONLINE_JUDGE
 	clock_t end = clock();
-	cout<<"Total Time Used: "<<(double)((end - start)/CLOCKS_PER_SEC)<<endl;
+	cout<<"Total Time Used: "<<(long double)(end - start)/CLOCKS_PER_SEC<<endl;
 	#endif
 	return 0;
 }
