@@ -1,0 +1,3 @@
+Naive Approach O(n^3) : 6
+Optimized Approach O(n^2) : 6
+Fast Optimized Approach O(n^3) : 6
