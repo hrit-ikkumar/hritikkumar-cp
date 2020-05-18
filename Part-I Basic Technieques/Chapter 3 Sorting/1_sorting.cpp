@@ -6,12 +6,9 @@ void swap(int *, int ); // swap two variables
 
 void bubble_sort(int*, int); // bubble sort function
 
-int partition(int *, int); // partition in array or finding the perfect location of that element so that all the elements which are in left side of that element should be lesser than that element
-// and all the element which are in the right side, they should be greater than that element. They can be equal to that element (Edge Case).
+void merge(int*, int, int, int, int); // merge two sorted arrays
 
-void merge(int*, int, int, int); // merge two sorted arrays
-
-void merge_sort(int*, int , int); // merge sort function
+void merge_sort(int*, int , int, int); // merge sort function
 
 int main(void)
 {
@@ -32,8 +29,14 @@ int main(void)
 	 int* a = new int[n]; // dynamic array allocation for 1D array
 	 for(int i=0;i<n;i++)cin>>a[i];
 	 
+	 int max_element = a[0];
+	for(int i=1;i<n;i++)
+	{
+		max_element = max(max_element, a[i]);
+	}
+	
 	 // bubble_sort(a, n);
-	 merge_sort(a, 0, n);
+	 merge_sort(a, 0, n-1, max_element+1);
 	 
 	 cout<<"Sorted Numbers: ";
 	 for(int i=0;i<n;i++)
@@ -66,47 +69,50 @@ void bubble_sort(int *a, int n)
 	}
 }
 
-void merge(int *a, int left, int pivot_index, int right)
+void merge(int *a, int left, int pivot_index, int right, int max_element)
 {
 	// This approach is implemented in O(1) memeory space. You may know the O(n) memory space 2-array-merge. (Left arrray and right array then make a combined sorted array then replace the values )
-	int i = left, j = pivot_index + 1;
-	
-	while(i<=pivot_index && j<=right)
-	{
-		if(a[i] > a[j])
-		{
-			swap(a[i], a[j]);
-			i++;
-		}
-	}
-	while(i<=pivot_index)
-	{
-		
-	}
+    int maxele = max_element;
+    int j = pivot_index + 1; 
+    int k = left; 
+    int i = left;
+    while (i <= pivot_index && j <= right) { 
+        if (a[i] % maxele <= a[j] % maxele) { 
+            a[k] = a[k] + (a[i] % maxele) * maxele; 
+            k++; 
+            i++; 
+        } 
+        else { 
+            a[k] = a[k] + (a[j] % maxele) * maxele; 
+            k++; 
+            j++; 
+        } 
+    } 
+    while (i <= pivot_index) { 
+        a[k] = a[k] + (a[i] % maxele) * maxele; 
+        k++; 
+        i++; 
+    } 
+    while (j <= right) { 
+        a[k] = a[k] + (a[j] % maxele) * maxele; 
+        k++; 
+        j++; 
+    } 
+  
+    // Obtaining actual values 
+    for (i = left; i <= right; i++) 
+        a[i] = a[i] / maxele; 
 }
 
-int partition(int *a, int left, int right)
-{
-	int i = left, j = right -1, pivot = a[right];
-	for(;i<right && j>=left; i++)
-	{
-		if(a[i] > pivot)
-		{
-			swap(a[i], a[j]);
-			j--;
-		}
-		
-	}
-	swap(a[j], a[right]);
-	return j;
-}
 
-void merge_sort(int *a, int left, int right)
+void merge_sort(int *a, int left, int right, int max_element)
 {
 	if(left >= right)
 	return;
-	int pivot_index = partition(a, 0, right); // Find the position of pivot (a[right])
-	merge_sort(a, left, pivot_index);
-	merge_sort(a, pivot_index+1, right);
-	merge(a, left, pivot_index, right);
+	int mid = (left + right)/2;
+	// quick sort apprach int pivot_index = partition(a, 0, right); // Find the position of pivot (a[right])
+	merge_sort(a, left, mid,max_element);
+	merge_sort(a, mid+1, right, max_element);
+	
+	merge(a, left, mid, right, max_element);
 }
