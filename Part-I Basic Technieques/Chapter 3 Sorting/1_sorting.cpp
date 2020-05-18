@@ -68,10 +68,20 @@ void bubble_sort(int *a, int n)
 
 void merge(int *a, int left, int pivot_index, int right)
 {
-	int i = left,j = pivot_index+1;
+	// This approach is implemented in O(1) memeory space. You may know the O(n) memory space 2-array-merge. (Left arrray and right array then make a combined sorted array then replace the values )
+	int i = left, j = pivot_index + 1;
 	
 	while(i<=pivot_index && j<=right)
 	{
+		if(a[i] > a[j])
+		{
+			swap(a[i], a[j]);
+			i++;
+		}
+	}
+	while(i<=pivot_index)
+	{
+		
 	}
 }
 
