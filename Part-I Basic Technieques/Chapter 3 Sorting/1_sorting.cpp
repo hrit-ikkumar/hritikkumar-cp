@@ -10,6 +10,8 @@ void merge(int*, int, int, int, int); // merge two sorted arrays
 
 void merge_sort(int*, int , int, int); // merge sort function
 
+void counting_sort(int *, int ); // counting sort
+
 int main(void)
 {
 	#ifndef ONLINE_JUDGE
@@ -21,6 +23,7 @@ int main(void)
 	 * Mainly, We have two options for sorting O(n^2) and O(n*log(n)).
 	 * Bubble Sort => O(n^2)
 	 * Merge Sort => O(n^2)
+	 * Counting Sort => O(n) (condition is that the numbers should be in between 0 to C
 	 */
 	 cout<<"Enter N: ";
 	 int n;
@@ -36,8 +39,8 @@ int main(void)
 	}
 	
 	 // bubble_sort(a, n);
-	 merge_sort(a, 0, n-1, max_element+1);
-	 
+	 //merge_sort(a, 0, n-1, max_element+1);
+	 counting_sort(a, n);
 	 cout<<"Sorted Numbers: ";
 	 for(int i=0;i<n;i++)
 	 {
@@ -71,6 +74,9 @@ void bubble_sort(int *a, int n)
 
 void merge(int *a, int left, int pivot_index, int right, int max_element)
 {
+	/** 
+	 *  This approach is just for positive integers. It won't work for negative numbers or double numbers
+	 */
 	// This approach is implemented in O(1) memeory space. You may know the O(n) memory space 2-array-merge. (Left arrray and right array then make a combined sorted array then replace the values )
     int maxele = max_element;
     int j = pivot_index + 1; 
@@ -115,4 +121,26 @@ void merge_sort(int *a, int left, int right, int max_element)
 	merge_sort(a, mid+1, right, max_element);
 	
 	merge(a, left, mid, right, max_element);
+}
+
+void counting_sort(int *a, int n)
+{
+	int max_element = a[0];
+	for(int i=0;i<n;i++) max_element   = max(max_element, a[i]);
+	
+	int count[max_element+1] ={0}; // assuming that the element are from 0 to max_element range
+	for(int i=0;i<n;i++)
+		count[a[i]] +=1;
+	
+	int i = 0;
+	for(int j=0;j<=max_element && i<n;j++)
+	{
+		if(count[j] > 0)
+		{
+			while(count[j]--)
+			{
+				a[i++] = j;
+			}
+		}
+	}
 }
