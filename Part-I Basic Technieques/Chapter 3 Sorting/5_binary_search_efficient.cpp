@@ -20,9 +20,6 @@ int main(void)
 	{
 		while( (index + b) < n && a[index+b] <= k) 
 			index += b;
-			
-		if(a[index] == k)
-		break;
 	}
 	if(a[index] == k)
 		cout<<index<<endl;
