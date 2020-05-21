@@ -30,6 +30,6 @@ int main(void)
 	// print all the key and pair in map
 	for(auto pr: mp)
 	{
-		cout<<pr.
+		cout<<pr.first<<" "<<pr.second<<endl;
 	}
 }
