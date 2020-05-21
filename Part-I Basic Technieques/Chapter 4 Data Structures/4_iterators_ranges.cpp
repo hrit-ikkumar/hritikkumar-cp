@@ -17,6 +17,8 @@ int main(void)
 	freopen("output.txt", "w", stdout);
 	#endif
 	
+	// Vector Iterators
+	
 	int n;
 	cin>>n;
 	vector<int> vt(n); // vector of n size
@@ -42,6 +44,40 @@ int main(void)
 	 * random_shuffle(a, a+n);
 	 */
 	 // We do have two more iterators (rbegin() & rend()) they are just reverse of iterators of the vector
+	 
+	 // Set Iterators
+	 set<int> st;
+	 cin>>n;
+	 for(int i=0;i<n;i++){int val; cin>>val; st.insert(val);}
+	 
+	 set<int>::iterator it = st.begin();  // this element is the smallest element in ordered set
+	 // auto it = st.begin();
+	 cout<<*it<<endl;
+	 // it iterator can be moved forward (++) and bacward(--) 
+	 it++;
+	 cout<<*it<<endl;
+	 it--;
+	 cout<<*it<<endl;
+	 // print whole set using iterator
+	 for(auto itr = st.begin(); itr!=st.end(); itr++)
+	 {
+		 cout<<*itr<<" ";
+	 }
+	 cout<<endl;
+	 
+	 // largest element in set
+	 it = st.end(); it--;
+	 cout<<*it<<endl;
+	 
+	 int k;
+	 cin>>k;
+	 it  = st.find(k); // returns the iterator which points to that element
+	 if(it!=st.end())
+		cout<<*it<<" has been founded"<<endl;
+	else
+		cout<<*it<<" has not founded"<<endl;
+		
+	 
 	 return 0; 
 }
 
