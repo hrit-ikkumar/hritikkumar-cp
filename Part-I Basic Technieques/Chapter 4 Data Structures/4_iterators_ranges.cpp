@@ -76,8 +76,28 @@ int main(void)
 		cout<<*it<<" has been founded"<<endl;
 	else
 		cout<<*it<<" has not founded"<<endl;
+	int find_me;
+	cin>>find_me;
+	// find the element which is nearted to given element
+	it = st.lower_bound(find_me);
+	
+	if(it==st.begin())
+		cout<<*it<<endl;
+	else if(it==st.end())
+	{
+		it--;
+		cout<<*it<<endl;
+	}
+	else
+	{
+		int a = *it; it--;
+		int b = *it;
 		
-	 
+		if((find_me-b) < (find_me - a))
+			cout<<b<<endl;
+		else
+			cout<<a<<endl;
+	}
 	 return 0; 
 }
 
