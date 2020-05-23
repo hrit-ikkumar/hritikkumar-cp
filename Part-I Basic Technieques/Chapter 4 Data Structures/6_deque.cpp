@@ -15,6 +15,7 @@ int main(void)
 	#endif
 	
 	// deque supports four operations pust_front, pop_front & push_back, pop_back
+	// front, back for getting the front and back element in this ds
 	deque<int> dq;
 	int n;
 	cin>>n;
@@ -25,6 +26,7 @@ int main(void)
 		dq.push_back(val);
 		dq.push_front(val);
 	}
+	cout<<dq.front()<<" "<<dq.back()<<endl;
 	cout<<dq.size()<<endl;
 	for(int i=0;i<n;i++)
 	{
