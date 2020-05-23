@@ -49,5 +49,8 @@ int main(void)
 		min_pq.pop();
 	}
 	cout<<min_pq.size()<<endl;
+	
+	// insertion and removal take O(logn) & retrieval takes O(1)
+	
 	return 0; 
 }
