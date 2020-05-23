@@ -16,5 +16,18 @@ int main(void)
 	
 	// Stack is a data structure which supports last in first out (LIFO) it has functions like push, pop, top 
 	stack<int> st;
-	
+	int n;
+	cin>>n;
+	for(int i=0;i<n;i++)
+	{
+		int val;
+		cin>>val;
+		st.push(val);
+	}
+	cout<<st.top()<<endl;
+	cout<<st.size()<<endl;
+	for(int i=0;i<n;i++)
+		st.pop();
+	cout<<st.size()<<endl;
+	return 0; //return type is int
 }
