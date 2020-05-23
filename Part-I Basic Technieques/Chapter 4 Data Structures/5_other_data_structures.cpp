@@ -23,6 +23,15 @@ int main(void)
 	cout<<bs[1]<<endl;
 	// you can count all the even parity by using count method
 	cout<<bs.count()<<endl;
+	// we can also do this also
+	bitset<10> bit_set(5); // we can give integer as an argument too :)
+	cout<<bit_set<<endl;
+	// we can also perform all the operations like & || ^ on two bitsets
+	bitset<10> b1(5);
+	bitset<10> b2(4);
+	cout<<(b1&b2)<<endl;
+	cout<<(b1|b2)<<endl;
+	cout<<(b1^b2)<<endl;
 	
 	return 0; // return type is int
 }
