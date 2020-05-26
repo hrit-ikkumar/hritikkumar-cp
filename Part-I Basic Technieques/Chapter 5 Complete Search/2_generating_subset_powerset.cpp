@@ -36,7 +36,8 @@ int main(void)
 
 void subsetPowerset(vector<vector<int>> &ans, int* a, int n)
 {
-	for(int i=0;i<pow(2,n); ++i)
+	// pow(2,n) == (1<<n)
+	for(int i=0;i<(1<<n); ++i)
 	{
 		vector<int> subset;
 		for(int j = 0;j<n;j++)
