@@ -6,6 +6,8 @@
 
 using namespace std; //namespace created as std
 
+void recursivePermutation(vector<vector<int>>&, int *, int , vector<bool>);
+
 vector<vector<int>> generatePermutation(int*, int);
 
 int main(void)
@@ -34,9 +36,15 @@ int main(void)
 	return 0; 
 }
 
-vector<vector<int>> generatePermutation(int *, int)
+void recursivePermutation(vector<vector<int>> &res, int *a, int n, vector<bool> chose)
+{
+	
+}
+
+vector<vector<int>> generatePermutation(int *a, int n)
 {
 	vector<vector<int>> res;
-	
+	vector<bool> chose(n, false);
+	recursivePermutation(res, a, n, chose); 
 	return res; 
 }
