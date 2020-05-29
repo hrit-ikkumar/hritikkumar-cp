@@ -6,7 +6,7 @@
 
 using namespace std; //namespace created as std  
 
-void backTrackNQ(long long &, int,int,  int *, int *, int *);
+void backTrackNQ(long long &, int,int,  int * &, int * &, int * &);
 
 long long backtrackingNQueenPlacment(int );
 
@@ -28,7 +28,7 @@ int main(void)
 	return 0; // return type is int 
 }
 
-void backTrackNQ(long long &count, int queens, int n, int* col, int *diag1, int *diag2)
+void backTrackNQ(long long &count, int queens, int n, int* &	col, int * &diag1, int *&diag2)
 {
 	if(queens == n)
 	{
@@ -46,7 +46,6 @@ void backTrackNQ(long long &count, int queens, int n, int* col, int *diag1, int 
 		
 		col[x] = diag1[x+queens] = diag2[x-queens+n-1] = 0;
 	}
-	
 }
 
 long long backtrackingNQueenPlacment(int n)
@@ -54,10 +53,10 @@ long long backtrackingNQueenPlacment(int n)
 	long long count = 0;
 	int* col = new int[n];
 	for(int i=0;i<n;i++) col[i] = 0;
-	int *diag1 = new int[n];
-	for(int i=0;i<n;i++) diag1[i] =0;
-	int *diag2 = new int[n];
-	for(int i=0;i<n;i++)diag2[i] = 0;
+	int *diag1 = new int[2*n];
+	for(int i=0;i<2*n;i++) diag1[i] =0;
+	int *diag2 = new int[2*n];
+	for(int i=0;i<2*n;i++)diag2[i] = 0;
 	
 	backTrackNQ(count, 0,n,col, diag1, diag2);
 	return count; // count is the answer of number of possible ways
