@@ -6,6 +6,8 @@
 
 using namespace std; //namespace created as std 
 
+void backtrackingLeftTopToBottomRight(int*, int , int , int , long long int &);
+
 long long int calculateNoOfWays(int);
 
 int main(void)
@@ -34,13 +36,18 @@ int main(void)
 							|_|_||_|_||_|_||_|_||_|_||_|_|
 							|_|_||_|_||_|_||_|_||_|_||_|_| <-
 	*/
+	
+void backtrackingLeftTopToBottomRight(int *a int n, int i, int j , long long int &)
+{
+	 // backtracking function goes here
+}
 long long int calculateNoOfWays(int n)
 {
 	int* board = new int*[n];
 	for(int i=0;i<n;i++) board[i] = new int[n];
 	
 	for(int i=0;i<n;i++)for(int j=0;j<n;j++) board[i][j] = 0;
-	
-	
+	// 0 mean not visited and 1 means that It has been visited!
+	long long int 
 	
 }
