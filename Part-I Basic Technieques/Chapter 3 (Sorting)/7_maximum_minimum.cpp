@@ -28,7 +28,7 @@ int main(void)
 	// Here, You have a array which first increasing than decreasing 
 	// like this 1 2 3 4 5 4 3 2 1. In this array you have to find the maximum number;
 	// We will take input again
-	for(int i=0;i<n;i++)cin>>a[i];
+	for(int i=0;i<n;i++)cin>>a[i]; 
 	index = -1;
 	for(int b = n/2; b>=1;b/=2)
 	{
