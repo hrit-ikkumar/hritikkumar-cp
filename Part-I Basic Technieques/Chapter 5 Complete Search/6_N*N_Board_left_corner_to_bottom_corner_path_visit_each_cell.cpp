@@ -37,9 +37,20 @@ int main(void)
 							|_|_||_|_||_|_||_|_||_|_||_|_| <-
 	*/
 	
-void backtrackingLeftTopToBottomRight(int *a int n, int i, int j , long long int &)
+void backtrackingLeftTopToBottomRight(int *a int n, int i, int j , long long int &ans)
 {
 	 // backtracking function goes here
+	 if(i== n-1 && j==n-1 && a[i][j] == 0)
+	{
+		a[i][j] = 0;
+		ans +=1;
+		return;
+	}
+	
+	if(i > 1 && j > 1)
+	{
+		backtrackingLeftTopToBottomRight(a, 
+	}
 }
 long long int calculateNoOfWays(int n)
 {
@@ -48,6 +59,7 @@ long long int calculateNoOfWays(int n)
 	
 	for(int i=0;i<n;i++)for(int j=0;j<n;j++) board[i][j] = 0;
 	// 0 mean not visited and 1 means that It has been visited!
-	long long int 
-	
+	long long int ans = 0;
+	backtrackingLeftTopToBottomRight(a, n, 0, 0, ans);
+	return 0; //return type is long long int
 }
