@@ -6,7 +6,7 @@
 
 using namespace std; //namespace created as std 
 
-void backtrackingLeftTopToBottomRight(int**, int , int , int , long long int &);
+void backtracking(int**, int , int , int , long long int &, int);
 
 long long int calculateNoOfWays(int);
 
@@ -37,21 +37,22 @@ int main(void)
 							|_|_||_|_||_|_||_|_||_|_||_|_| <-
 	*/
 	
-void backtrackingLeftTopToBottomRight(int **a ,int n, int i, int j , long long int &ans)
+void backtracking(int **a ,int n, int i, int j , long long int &ans, int cells)
 {
 	if( i< 0 || j < 0 || i > n-1 || j > n-1 || a[i][j] == 1 )
 		return;
-	 if(i== n-1 && j==n-1)
+	 if(i== n-1 && j==n-1 &&  cells == n*n-1)
 	{
 		a[i][j] = 1;
 		ans++;
 		return;
 	}
 	a[i][j] = 1;
-	backtrackingLeftTopToBottomRight(a, n, i-1, j, ans );
-	backtrackingLeftTopToBottomRight(a, n, i, j-1, ans );
-	backtrackingLeftTopToBottomRight(a, n, i+1, j, ans );
-	backtrackingLeftTopToBottomRight(a, n, i, j+1, ans );
+	cells +=1;
+	backtracking(a, n, i-1, j, ans , cells);
+	backtracking(a, n, i, j-1, ans, cells );
+	backtracking(a, n, i+1, j, ans, cells );
+	backtracking(a, n, i, j+1, ans, cells);
 }
 long long int calculateNoOfWays(int n)
 {
@@ -61,6 +62,7 @@ long long int calculateNoOfWays(int n)
 	for(int i=0;i<n;i++)for(int j=0;j<n;j++) board[i][j] = 0;
 	// 0 mean not visited and 1 means that It has been visited!
 	long long int ans = 0;
-	backtrackingLeftTopToBottomRight(board, n, 0, 0, ans);
+	int cellTouch = 0;
+	backtracking(board, n, 0, 0, ans, cellTouch);
 	return ans; //return type is long long int
 }
