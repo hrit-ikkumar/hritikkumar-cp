@@ -9,7 +9,7 @@ using namespace std; //namespace created as std
 void backtracking(int**, int , int , int , long long int &, int);
 
 long long int calculateNoOfWays(int);
-
+int ittr = 0;
 int main(void)
 {
 	std::ios::sync_with_stdio(false); cin.tie(0); // fastio
@@ -24,6 +24,8 @@ int main(void)
 	long long int ans = calculateNoOfWays(n); 
 	cout<<ans<<endl;
 	
+	
+	cout<<"ITR: "<<ittr<<endl;
 	return 0; //return type is int
 }
 /*
@@ -41,18 +43,34 @@ void backtracking(int **a ,int n, int i, int j , long long int &ans, int cells)
 {
 	if( i< 0 || j < 0 || i > n-1 || j > n-1 || a[i][j] == 1 )
 		return;
-	 if(i== n-1 && j==n-1 &&  cells == n*n-1)
-	{
-		a[i][j] = 1;
-		ans++;
-		return;
-	}
+	
 	a[i][j] = 1;
 	cells +=1;
+	 if(i== n-1 && j==n-1 &&  cells == n*n)
+	{
+		cells +=1;
+		a[i][j] = 1;
+		cout<<i<<" +++ "<<j<<endl;
+		ans++;
+		a[i][j] = 0;
+		return;
+	}
+	cout<<endl;
+	for(int row=0;row<n;row++)
+	{
+		for(int col=0; col < n; col++)
+		{
+			cout<<a[row][col]<<" ";
+		}
+		cout<<endl;
+	}
+	ittr++;
+	cout<<endl;
 	backtracking(a, n, i-1, j, ans , cells);
 	backtracking(a, n, i, j-1, ans, cells );
 	backtracking(a, n, i+1, j, ans, cells );
 	backtracking(a, n, i, j+1, ans, cells);
+	a[i][j] = 0;
 }
 long long int calculateNoOfWays(int n)
 {
