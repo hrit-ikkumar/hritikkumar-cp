@@ -44,32 +44,42 @@ int backtracking(int **a ,int n, int i, int j , int cells)
 {
 	if( i< 0 || j < 0 || i > n-1 || j > n-1 || a[i][j] == 1  || (i==n-1 && j==n-1 && cells != n*n-1))
 		return 0;
+
 	a[i][j] = 1;
 	cells +=1;
 	 if(i== n-1 && j==n-1 &&  cells == n*n)
 	{
-		cells +=1;
-		a[i][j] = 1;
-		cout<<i<<" +++ "<<j<<endl;
-		a[i][j] = 0;
+		a[i][j] = 0; // backtrack the step which we have taken
 		return 1;
 	}
-	cout<<endl;
-	for(int row=0;row<n;row++)
-	{
-		for(int col=0; col < n; col++)
-		{
-			cout<<a[row][col]<<" ";
-		}
-		cout<<endl;
+	else if( i==0&& j >0 && j<n-1)
+	{	
+		if(a[i][j-1] == 0 && a[i][j+1] == 0 && (i+1) < n && a[i+1][j]==1)
+			return 0;
 	}
+	else if( i==n-1&& j >0 && j<n-1)
+	{
+		if(a[i][j-1] == 0 && a[i][j+1] == 0 && (i-1) >= 0 && a[i-1][j] == 1)
+			return 0;
+	}
+	else if( j==0 && i>0 && i<n-1)
+	{
+		if(a[i-1][j] == 0 && a[i+1][j] == 0 && (j+1) < n && a[i][j+1] ==1)
+			return 0;
+	}
+	else if(  j==n-1 && i>0 && i<n-1)
+	{
+		if(a[i-1][j] == 0 && a[i+1][j] == 0 && (j-1) >=0 && a[i][j-1] == 1)
+			return 0;
+	}
+
 	ittr++;
-	cout<<endl;
-	int left = backtracking(a, n, i-1, j, cells);
-	int up = backtracking(a, n, i, j-1,cells );
-	int down = backtracking(a, n, i, j+1,cells);
-	int right = backtracking(a, n, i + 1, j, cells);
-	a[i][j] = 0;
+	// combinations which are possible
+	int left = 		backtracking(a, n, i-1, 	j, 		cells);
+	int up = 		backtracking(a, n, i, 	j-1,	cells );
+	int down = 	backtracking(a, n, i,		j+1,	cells);
+	int right = 	backtracking(a, n, i+1,	j, 		cells);
+	a[i][j] = 0;// backtrack the step which have taken
 	return left + up +right + down;
 }
 long long int calculateNoOfWays(int n)
