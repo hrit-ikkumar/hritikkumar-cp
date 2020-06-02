@@ -42,6 +42,7 @@ ____________________
 	
 int backtracking(int **a ,int n, int i, int j , int cells)
 {
+	// optimization-1 & optimization-2
 	if( i< 0 || j < 0 || i > n-1 || j > n-1 || a[i][j] == 1  || (i==n-1 && j==n-1 && cells != n*n-1))
 		return 0;
 
@@ -52,6 +53,8 @@ int backtracking(int **a ,int n, int i, int j , int cells)
 		a[i][j] = 0; // backtrack the step which we have taken
 		return 1;
 	}
+	
+	// optimization-3
 	else if( i  == 0 && (i+1) < n && a[i+1][j] == 1&& (j-1) >=0 &&(j+1) <n && a[i][j-1] == 0 && a[i][j+1] ==0)
 	{
 		a[i][j] = 0;
@@ -68,6 +71,27 @@ int backtracking(int **a ,int n, int i, int j , int cells)
 		return 0; 
 	}
 	else if( j  == n-1 && (j-1) >=0 && a[i][j-1] == 1&& (i-1) >=0 &&(i+1) <n && a[i-1][j] == 0 && a[i+1][j] ==0)
+	{
+		a[i][j] = 0;
+		 return 0; 
+	}
+		// optimizatin-4
+	else if( (i-1) >= 0 && a[i-1][j]  == 1 && (i+1) < n && a[i+1][j] == 1&& (j-1) >=0 &&(j+1) <n && a[i][j-1] == 0 && a[i][j+1] ==0)
+	{
+		a[i][j] = 0;
+		return 0; 
+	}
+	else if( (i+1) < n && a[i+1][j]  == 1 && (i-1) >=0 && a[i-1][j] == 1&& (j-1) >=0 &&(j+1) <n && a[i][j-1] == 0 && a[i][j+1] ==0)
+	{
+		a[i][j] = 0;
+		return 0; 
+	}
+	else if( (j-1) >=0 && a[i][j-1]  == 1 && (j+1) < n && a[i][j+1] == 1&& (i-1) >=0 &&(i+1) <n && a[i-1][j] == 0 && a[i+1][j] ==0)
+	{
+		a[i][j] = 0;
+		return 0; 
+	}
+	else if( (j+1)  <n && a[i][j+1] == 1 && (j-1) >=0 && a[i][j-1] == 1&& (i-1) >=0 &&(i+1) <n && a[i-1][j] == 0 && a[i+1][j] ==0)
 	{
 		a[i][j] = 0;
 		 return 0; 
