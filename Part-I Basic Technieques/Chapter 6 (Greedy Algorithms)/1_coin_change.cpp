@@ -6,7 +6,7 @@
 using namespace std; // namespace created as std
 
 int maximumCoins(int*, int , int); // maximumCoins
-
+// Greedy alogorithms are not always correct but DP algorithms are!
 int main(void)
 {
 	std::ios::sync_with_stdio(false); cin.tie(0); // fastio
