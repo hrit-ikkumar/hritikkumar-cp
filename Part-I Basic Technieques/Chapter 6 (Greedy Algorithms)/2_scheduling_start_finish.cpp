@@ -17,9 +17,16 @@ int main(void)
 	
 	int n;
 	cin>>n;
-	int* start = new int [n], * finish = new int [n];
+	multiset<pair<int, int> > ms;
 	for(int i=0;i<n;i++)
-	cin>>start[i]>>finish[i];
-	
-	
+	{
+		int start , end;
+		cin>>start>>end;
+		ms.insert(make_pair(start, end));
+	}
+	for(pair pr: ms)
+		cout<<pr.first<<" "<<pr.second<<endl;
+		
+		
+	return 0; //return type is int
 }
