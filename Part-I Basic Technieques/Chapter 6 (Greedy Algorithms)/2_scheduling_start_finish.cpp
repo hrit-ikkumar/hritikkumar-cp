@@ -6,7 +6,7 @@
 
 using namespace std; //namespace created as std
 
-int maximumTasksScheduling(multiset<pair<int, int>> , int );
+vector<pair<int, int>> maximumTasksScheduling(multiset<pair<int, int>> , int );
 
 int main(void)
 {
@@ -27,18 +27,28 @@ int main(void)
 		ms.insert(make_pair(end, start));
 	}
 	
-	int ans = maximumTasksScheduling(ms, n);
+	vector<pair<int, int>> ans = maximumTasksScheduling(ms, n);
 	
-	cout<<ans<<endl; 
+	for(pair<int, int> pr: ans)
+	{
+		cout<<pr.first<<" "<<pr.second<<endl;
+	}
 	
 	return 0; //return type is int
 }
 
-int maximumTasksScheduling(multiset<pair<int, int>> ms, int n)
+vector<pair<int,int>> maximumTasksScheduling(multiset<pair<int, int>> ms, int n)
 {
+	vector<pair<int, int>> res;
 	int start = 0, end = 0;
 	for(pair<int, int> pr: ms)
 	{
-		
+		int currStart = pr.second, currEnd = pr.first;
+		if( currStart >=start && currStart >=end)
+		{
+			start = currStart, end = currEnd;
+			res.emplace_back(start, end);
+		}
 	}
+	return res;
 }
