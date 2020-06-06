@@ -35,5 +35,19 @@ int main(void)
 
 vector<pair<int, int>> tasksAndDeadline(int *duration, int* deadline, int n)
 {
-	
+	multiset<pair<int, int>> ms;
+	for(int i=0;i<n;i++)
+	{
+		ms.insert({duration[i], deadline[i]});
+	}
+	int end = 0, points= 0;
+	vector<pair<int, int>> order;
+	for(pair<int, int> pr: ms)
+	{
+		end += pr.first;
+		points += pr.second - end;
+		order.push_back({pr.first, pr.second});
+	}
+	cout<<"Total Score: "<<points<<endl;
+	return order;
 }
