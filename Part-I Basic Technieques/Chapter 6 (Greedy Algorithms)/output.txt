@@ -1,5 +1,2 @@
-Total Score: -10
-2 7
-3 5
-4 2
-4 5
+MinSum: 46
+4
