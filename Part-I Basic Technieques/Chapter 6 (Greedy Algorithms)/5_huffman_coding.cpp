@@ -3,6 +3,7 @@
 
 #define endl '\n'
 #define MAX_TREE_HT 100
+
 using namespace std; //namespace created as std
 
 // user defined data type for node
@@ -60,8 +61,10 @@ void printHuffmanCodes(Node* root , string curr, vector<pair<char, string>> &ans
 vector<pair<char, string>> huffmanCoding(char * data, int * freq , int n)
 {
 	Node *left, *right, *top;
+	
 	auto comp = [] (Node*  a, Node* b) -> bool { return a->freq > b->freq;};
 	priority_queue<Node*, vector<Node*>, decltype(comp)> minPQ (comp);
+	
 	for(int i=0;i<n;i++)
 	{
 		minPQ.push( new Node(data[i], freq[i]) );
