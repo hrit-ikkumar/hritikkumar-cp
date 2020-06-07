@@ -1,2 +1,3 @@
 Minimum Coins: 4
 Minimum Coins: 4
+Minimum Coins: 4
