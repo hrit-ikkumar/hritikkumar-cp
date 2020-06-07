@@ -80,7 +80,7 @@ vector<pair<char, string>> huffmanCoding(char * data, int * freq , int n)
 		
 		top = new Node('$', left->freq + right->freq);
 		if(left->freq >= right->freq)
-		{
+		{ 
 			top->left = left;
 			top->right = right;
 		}
