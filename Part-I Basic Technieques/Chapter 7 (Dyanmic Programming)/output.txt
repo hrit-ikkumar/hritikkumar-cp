@@ -1,5 +1,1 @@
-Minimum Coins: 4
-Minimum Coins: 4
-Minimum Coins: 4
-Minimum Coins: 1 5 7 7 
-0
+Counts: 6
