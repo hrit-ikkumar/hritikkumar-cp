@@ -6,6 +6,8 @@
 
 using namespace std; // namespace created as std
 
+long long int dpMinCoinEfficientWithCoins( vector<long long int>, long long int, long long int); // dynamic programming solution by using memorization
+
 long long int dpMinCoinEfficient( vector<long long int>, long long int, long long int); // dynamic programming solution by using memorization
 
 long long int dpMinCoin( vector<long long int>, long long int, long long int, vector<long long int> &, vector<bool> &); // dynamic programming solution by using memorization
@@ -33,9 +35,40 @@ long long int recMinCoin(vector<long long int> , long long int, long long int); 
 	vector<bool> dp_ready(amount +1, false); // weather, we have calculated the values or not 
 	cout<<"Minimum Coins: "<<dpMinCoin(coins, n, amount, dp_table, dp_ready)<<endl;
 	cout<<"Minimum Coins: "<<dpMinCoinEfficient(coins, n, amount)<<endl;
+	cout<<"Minimum Coins: "<<dpMinCoinEfficientWithCoins(coins, n, amount)<<endl;
 	
 	return 0; // return type is int  
 }
+
+long long int dpMinCoinEfficientWithCoins(vector<long long int> coins, long long int n, long long int amount)
+{
+	vector<long long int> dp_table(amount+1, 0);
+	vector<long long int> first(amount +1, 0);
+	
+	dp_table[0] = 0;
+	for(int x = 1; x <= amount; ++x)
+	{
+		dp_table[x] = INT_MAX;
+		for(auto c : coins)
+		{
+			if( (x - c) >= 0 && dp_table[x-c] + 1 < dp_table[x])
+			{
+				dp_table[x] = dp_table[x-c] + 1;
+				first[x] = c;
+			}
+		}
+	}
+	
+	while(amount>0)
+	{
+		cout<<first[amount]<<" ";
+		amount-= first[amount];
+	}
+	cout<<endl;
+	
+	return dp_table[amount];
+}
+
 
 long long int dpMinCoinEfficient(vector<long long int> coins, long long int n, long long int amount)
 {
