@@ -38,6 +38,11 @@ long long int dpCountPossibleCoinCombinations(vector<int> coins, int n, int amou
 			if( (x-c) >= 0)
 			{
 				count[x] += count[x-c];
+				/* if the answer is too big
+				 * and the question asked for only mod value
+				 * count[x] += count[x-c] % mod;
+				 * count[x] %= mod;
+				 */
 			}
 		}
 	}
