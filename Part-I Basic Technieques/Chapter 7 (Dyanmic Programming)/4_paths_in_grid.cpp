@@ -11,15 +11,20 @@ int main(void)
 {
 	std::ios::sync_with_stdio(false); cin.tie(0); // fastio
 	#ifndef ONLINE_JUDGE
-	freopen("intput.txt", "r",stdin);
+	freopen("input.txt", "r",stdin);
 	freopen("output.txt", "w", stdout);
 	#endif
 	
 	int n;
 	cin>>n;
 	int** grid = new int*[n];
-	for(int i=0;i<n;i++) grid[i] = new int[n];
-	for(int i=0;i<n;i++) for(int j=0;j<n;j++) cin>>grid[i][j];
+	for(int i=0;i<n;i++) 
+		grid[i] = new int[n];
+	for(int i=0;i<n;i++)
+	{
+		for(int j=0;j<n;j++) 
+			cin>>grid[i][j];
+	}
 	int ans  = maximumSumPathDP(grid, n); // there is condition we can either move down or right
 	// path from upper left corner to lower right corner
 	cout<<ans<<endl;
@@ -29,7 +34,7 @@ int main(void)
 int maximumSumPathDP(int** grid, int n)
 {
 	int** dp_table = new int*[n];
-	for(int i=0;i<n;i++) dp_table[i] = new int [n];
+	for(int i=0;i<n;i++) dp_table[i] = new int[n];
 	
 	for(int i=0;i<n;++i)
 	{
@@ -45,5 +50,5 @@ int maximumSumPathDP(int** grid, int n)
 				dp_table[i][j] = grid[i][j];
 		}
 	}
-	return dp_table[n-2][n-2];
+	return dp_table[n-1][n-1];
 }
