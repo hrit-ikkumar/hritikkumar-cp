@@ -1,0 +1,43 @@
+[editor]
+line_wrapping=false
+line_break_column=478
+auto_continue_multiline=true
+
+[file_prefs]
+final_new_line=true
+ensure_convert_new_lines=false
+strip_trailing_spaces=false
+replace_tabs=false
+
+[indentation]
+indent_width=4
+indent_type=1
+indent_hard_tab_width=8
+detect_indent=false
+detect_indent_width=false
+indent_mode=3
+
+[project]
+name=hritikkumar-cp
+base_path=/home/hritikkumar/Documents/hritikkumar/Competitive Programming/hritikkumar-cp
+description=
+file_patterns=
+
+[long line marker]
+long_line_behaviour=1
+long_line_column=202
+
+[files]
+current_page=2
+FILE_NAME_0=9;None;0;EUTF-8;1;1;0;%2Fhome%2Fhritikkumar%2FDocuments%2Fhritikkumar%2FCompetitive%20Programming%2Fhritikkumar-cp%2FPart-I%20Basic%20Technieques%2FChapter%207%20%28Dyanmic%20Programming%29%2Finput.txt;0;4
+FILE_NAME_1=0;None;0;EUTF-8;1;1;0;%2Fhome%2Fhritikkumar%2FDocuments%2Fhritikkumar%2FCompetitive%20Programming%2Fhritikkumar-cp%2FPart-I%20Basic%20Technieques%2FChapter%207%20%28Dyanmic%20Programming%29%2Foutput.txt;0;4
+FILE_NAME_2=316;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhritikkumar%2FDocuments%2Fhritikkumar%2FCompetitive%20Programming%2Fhritikkumar-cp%2FPart-I%20Basic%20Technieques%2FChapter%207%20%28Dyanmic%20Programming%29%2F5_knapsack_problem.cpp;0;4
+
+[VTE]
+last_dir=/home/hritikkumar/Documents/hritikkumar/Competitive Programming/hritikkumar-cp/Part-I Basic Technieques/Chapter 7 (Dyanmic Programming)
+
+[build-menu]
+C++FT_01_LB=_Build
+C++FT_01_CM=g++ -std=c++17 -Wshadow -Wall -o "%e" "%f" -g -fsanitize=address -fsanitize=undefined -D_GLIBCXX_DEBUG
+C++FT_01_WD=
+filetypes=C++;
