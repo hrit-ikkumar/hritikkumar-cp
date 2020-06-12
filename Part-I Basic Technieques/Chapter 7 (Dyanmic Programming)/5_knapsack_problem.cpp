@@ -8,6 +8,8 @@ using namespace std;
 
 int knapsackDP(int*, int);
 
+int knapsackDPEfficient(int*, int);
+
 int main(void)
 {
 	std::ios::sync_with_stdio(false); cin.tie(0); // fastio
@@ -20,7 +22,9 @@ int main(void)
 	cin>>n;
 	int* weight = new int [n];
 	for(int i=0;i<n;i++) cin>> weight[i];
-	int ans = knapsackDP(weight, n);
+	int ans = knapsackDP(weight, n); // using 2d array
+	
+	ans = knapsackDPEfficient(weight, n); // using 1d array
 	
 	cout<<ans<<endl;
 	
@@ -55,6 +59,35 @@ int knapsackDP(int* weight, int n)
 	for(int i=0; i<=total_sum; ++i)
 	{
 		if(dp_table[i][n])
+			ans +=1;
+	}
+	
+	return ans;
+}
+
+int knapsackDPEfficient(int* weight, int n)
+{
+	int ans = 0;
+	int total_sum = accumulate(weight, weight + n, 0);
+	bool* dp_table = new bool[total_sum+1];
+	
+	for(int i=0;i<=total_sum; ++i)
+		dp_table[i] = false;
+	
+	
+	dp_table[0] = true;
+	for(int k = 1; k<=n; k++)
+	{
+		for(int x = total_sum; x >= 0; --x)
+		{
+			if(dp_table[x])
+				dp_table[x+weight[k-1]] = true;
+		}
+	}
+	
+	for(int i=0; i<=total_sum; ++i)
+	{
+		if(dp_table[i])
 			ans +=1;
 	}
 	
