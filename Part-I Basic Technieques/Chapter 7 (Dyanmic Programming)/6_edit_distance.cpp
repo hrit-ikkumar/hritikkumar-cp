@@ -44,29 +44,26 @@ int editDistanceDP(string s1, string s2)
 			dp_table[i][j] = min (dp_table[i-1][j] + 1, min (dp_table[i][j-1] +1, dp_table[i-1][j-1] + (s1[i-1] == s2[j-1] ? 0 : 1)));
 		}
 	}
-	string res = "", curr = "";
+	string res = "";
 	int i = s1.size(), j= s2.size();
 	while(i>0 && j>0)
 	{
 
 		if(dp_table[i][j] == dp_table[i-1][j] + 1 && s1[i-1]   != s2[j-1])
 		{
-			curr="";
 			i-=1;
 		}
 		else if( dp_table[i][j] == dp_table[i][j-1] +1 && s1[i-1] != s2[j-1])
 		{
-			curr="";
 			j-=1;
 		}
-		else
+		else if(dp_table[i][j] == (dp_table[i-1][j-1] + (s1[i-1] == s2[j-1] ? 0: 1)) && s1[i-1] == s2[j-1])
 		{
-			curr = s1[i-1] + curr;
+			res = s1[i-1] + res;
 			i-=1; j-=1;
 		}
-		
-		if(res.size() < curr.size())
-			res = curr;
+		else
+			i-=1, j-=1;
 	}
 	cout<<res<<endl;
 	return dp_table[s1.size()][s2.size()];
