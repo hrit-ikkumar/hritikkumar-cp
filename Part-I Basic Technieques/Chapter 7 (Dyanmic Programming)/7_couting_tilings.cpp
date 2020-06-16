@@ -3,14 +3,16 @@
 #include<bits/stdc++.h> // all header files
 
 #define endl '\n'
-
+#define pi 3.14
 typedef long long ll;
-
+typedef long double ld;
 using namespace std; // namespace created as std
 
 void helperFunc(int , int, int , int, ll**, int , int);
 
 ll countingTilingsDP(int , int , int , int);
+
+ll countingTilingsMath(int , int , int , int);
 
 int main(void)
 {
@@ -23,13 +25,26 @@ int main(void)
 	cin>>n>>m;
 	int a , b;
 	cin>>a>>b;
-	cout<<"Hello World"<<endl;
-	ll ans = countingTilingsDP(n, m, a, b);
+	ll ans = 0; // countingTilingsDP(n, m, a, b);
+	ans = countingTilingsMath(n, m, a,b);
 	
 	cout<<ans<<endl;
 	
 	return 0; // return type is int
 }
+ll countingTilingsMath(int n, int m, int a, int b)
+{
+	ld ans = 1;
+	for(int i = 1; i<= ceil(n/2); ++i)
+	{
+		for(int j = 1 ; j<=ceil(m/2); ++j)
+		{
+			ans *= (ld)4 * ( cos((ld)(pi * i) / (n+1)) * cos((ld)(pi * i) / (n+1)) + cos((ld)(pi * j) / (m+1))*cos((ld)(pi * j) / (m+1)) );
+		}
+	}
+	return (ll)ans;
+}
+
 
 void helperFunc(int x, int y , int mask, int next_mask , ll** dp_table, int n, int m)
 {
