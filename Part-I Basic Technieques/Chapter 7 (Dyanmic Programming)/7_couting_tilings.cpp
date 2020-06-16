@@ -14,7 +14,7 @@ ll countingTilingsDP(int , int , int , int);
 
 int main(void)
 {
-	std::ios::sync_with_stdio(false); cin.tie(0); cout.tie(0); // fastio
+	std::ios::sync_with_stdio(false); cin.tie(0); // fastio
 	#ifndef ONLINE_JUDGE
 	freopen("input.txt", "r", stdin);
 	freopen("output.txt", "w", stdout);
@@ -23,14 +23,13 @@ int main(void)
 	cin>>n>>m;
 	int a , b;
 	cin>>a>>b;
-	
+	cout<<"Hello World"<<endl;
 	ll ans = countingTilingsDP(n, m, a, b);
 	
 	cout<<ans<<endl;
 	
 	return 0; // return type is int
 }
-
 
 void helperFunc(int x, int y , int mask, int next_mask , ll** dp_table, int n, int m)
 {
@@ -55,7 +54,7 @@ void helperFunc(int x, int y , int mask, int next_mask , ll** dp_table, int n, i
 ll countingTilingsDP(int n, int m, int a, int b)
 {
 	ll** dp_table = new ll*[n];
-	for(int i=0;i<n;i++) dp_table[i] = new ll[1ll* 1<<m];
+	for(int i=0;i<n;i++) dp_table[i] = new ll[ 1<<m];
 	for(int i=0;i<n;i++) for(int j= 0; j<(1<<m);j++) dp_table[i][j] = 0;
 	dp_table[0][0] = 1;
 	for(int x =0; x<n;++x)
@@ -65,5 +64,12 @@ ll countingTilingsDP(int n, int m, int a, int b)
 			helperFunc(x, 0, mask, 0, dp_table, n, m);
 		}
 	}
+	for(int i=0;i<n;i++)
+	{
+		for(int j = 0;j<(1<<m);++j)
+			cout<<dp_table[i][j]<<" ";
+		cout<<endl;
+	}
+	cout<<endl;
 	return dp_table[n][0];
 }
