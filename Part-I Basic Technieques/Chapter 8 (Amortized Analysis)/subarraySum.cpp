@@ -6,7 +6,7 @@
 
 using namespace std; // namespace created as std
 
-vector<int> subarraySum(int*, int , int);
+vector<pair<int, int>> subarraySum(int*, int , int);
 
 int main(void)
 {
@@ -23,41 +23,36 @@ int main(void)
 	
 	for(int i=0;i<n;i++) cin>>a[i]; // array
 	
-	vector<int> ans = subarraySum(a, n, sum);
-	for(int x: ans)
-		cout<<x<<" ";
+	vector<pair<int, int>> ans = subarraySum(a, n, sum);
+	cout<<ans.size()<<endl;
+	for(pair x: ans)
+		cout<<x.first<<" "<<x.second<<endl;
 	cout<<endl;
 	return 0; // return type is int
 }
 
-vector<int> subarraySum(int *a, int n, int sum)
+vector<pair<int, int>> subarraySum(int *a, int n, int sum)
 {
-	vector<int> res;
+	vector<pair<int,int>> res;
 	int left, right, currSum;
-	left = 0, right = 1, currSum = a[left];
 	int count = 0;
 	for(int i =0 ;i<n; i++)
 	{
 		if(a[i] == sum)
 			count++;
 	}
-	while(left < n -1 && right < n)
+	for(left=0, right =0, currSum=0;left<n && right<n ; left+=1)
 	{
-		currSum += a[right];
-		if(currSum == sum )
-			count+=1;
-		right +=1;
-		if(right == n)
+		while(right<n && (currSum + a[right]) <= sum)
 		{
-			left +=1;
-			right = left +=1;
-			currSum = a[left];
-			continue;
+			currSum += a[right];
+			right +=1;
 		}
-	}
-	for(int i = left, j = right;i<=j;i++)
-	{
-		res.push_back(a[i]);
+		if( currSum == sum)
+		{
+			res.push_back({left, right-1});
+		}
+		currSum -= a[left];
 	}
 	return res;
 }
