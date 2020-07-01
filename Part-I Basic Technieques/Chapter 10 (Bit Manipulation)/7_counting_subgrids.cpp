@@ -44,7 +44,7 @@ int countingSubgrids(vector<vector<int>> &color)
 	 * Then we can use __builtin_popcount function also.
 	 * 	int count = 0;
 		for (int i = 0; i <= n/N; i++) {
-		count += __builtin_popcount(color[a][i]&color[b][i]);
+			count += __builtin_popcount(color[a][i]&color[b][i]);
 		}
 	 */
 	return ans;
