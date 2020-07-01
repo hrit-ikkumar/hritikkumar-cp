@@ -15,6 +15,7 @@ int main(void)
 	freopen("input.txt","r", stdin);
 	freopen("output.txt", "w", stdout);
 	#endif
+	
 	int num;
 	cin>>num; // integer to number
 	string binary = intToBinary(num);
@@ -24,6 +25,8 @@ int main(void)
 	int num1 = num | (1<<k); // set kth bit of num to 1
 	binary = intToBinary(num1);
 	cout<<binary<<endl;
+	
+	// (1<<k) gives you the 1 bit at kth position
 	
 	int num2 = num & ~(1<<k); // set kth bit of num to 0
 	binary = intToBinary(num2);
