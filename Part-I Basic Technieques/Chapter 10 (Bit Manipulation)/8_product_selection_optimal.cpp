@@ -6,6 +6,8 @@
 
 using namespace std; // namespace created as std
 
+int productSelectionRecurr(vector<vector<int>> &, int , int );
+
 int productSelectionDP(vector<vector<int>> &, int , int );
 
 int main(void)
@@ -22,12 +24,18 @@ int main(void)
 	for(int i=0;i<k;i++) for(int j=0;j<n;j++) cin>>a[i][j];
 	int ans = productSelectionDP(a,k,n);
 	cout<<ans<<endl;
+	//ans = productSelectionRecurr(a,k, n);
 	return 0; // return type is int
 }
+/*
+int productSelectionRecurr(vector<vector<int>> &a, int k, int n)
+{
+	if(k==((1<<)))
+}*/
 
 int productSelectionDP(vector<vector<int>> &a, int k, int n)
 {
-	vector<vector<int>> dp_table(1<<k, vector<int>(n));
+	vector<vector<int>> dp_table(1<<k, vector<int>(n, -1));
 	for(int x =0;x<k;++x)
 		dp_table[1<<x][0] = a[x][0];
 	
@@ -39,9 +47,9 @@ int productSelectionDP(vector<vector<int>> &a, int k, int n)
 			for(int x = 0;x<k;x++)
 			{
 				if(s&(1<<x))
-					dp_table[s][d]  = min(dp_table[s][d], dp_table[s^(1<<x)][d-1] + a[x][d]);
+					dp_table[s][d]  = min(dp_table[s][d], dp_table[s|(1<<x)][d-1] + a[x][d]);
 			}
 		}
 	}
-	return dp_table[(1<<k) - 1][n-1];
+	return dp_table[1<<(k-1)][n-1];
 }
