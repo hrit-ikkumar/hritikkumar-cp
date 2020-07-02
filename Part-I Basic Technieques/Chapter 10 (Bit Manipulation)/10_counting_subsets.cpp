@@ -6,7 +6,7 @@
 
 using namespace std; // namespace created as std
 
-vector<int> countingSubsetSum(int );
+vector<int> countingSubsetSum(vector<int> &, int );
 
 int main(void)
 {
@@ -17,24 +17,35 @@ int main(void)
 	#endif
 	int n;
 	cin>>n;
-	vector<int> ans = countingSubsetSum(n);
+	vector<int> value(1<<n);
+	for(int i=0;i<(1<<n); i++)	cin>>value[i];
+	vector<int> ans = countingSubsetSum(value, n);
 	for(int i=0;i<(signed)ans.size();i++)
 	{
+		cout<<"{";
 		for(int j=0;j<n;j++)
 		{
 			if(i &(1<<j))
 				cout<<j<<" ";
 		}
-		cout<<" : "<<ans[i]<<endl;
+		cout<<"}: "<<ans[i]<<endl;
 	}
 	return 0; // return type is int
 }
 
-vector<int> countingSubsetSum(int n)
+vector<int> countingSubsetSum(vector<int> &value, int n)
 {
 	vector<int> sum(1<<n);
 	for(int s=0;s<(1<<n); s++)
 	{
-		sum[s] = 
+		sum[s] = value[s];
 	}
+	for(int k=0;k<n;k++)
+	{
+		for(int s=0;s<(1<<n); s++)
+		{
+			if(s&(1<<k)) sum[s] += sum[s^(1<<k)];
+		}
+	}
+	return sum;
 }
