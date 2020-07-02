@@ -6,8 +6,6 @@
 
 using namespace std; // namespace created as std
 
-int productSelectionRecurr(vector<vector<int>> &, int , int );
-
 int productSelectionDP(vector<vector<int>> &, int , int );
 
 int main(void)
@@ -24,14 +22,8 @@ int main(void)
 	for(int i=0;i<k;i++) for(int j=0;j<n;j++) cin>>a[i][j];
 	int ans = productSelectionDP(a,k,n);
 	cout<<ans<<endl;
-	//ans = productSelectionRecurr(a,k, n);
 	return 0; // return type is int
 }
-/*
-int productSelectionRecurr(vector<vector<int>> &a, int k, int n)
-{
-	if(k==((1<<)))
-}*/
 
 int productSelectionDP(vector<vector<int>> &a, int k, int n)
 {
