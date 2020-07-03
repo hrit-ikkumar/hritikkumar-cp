@@ -26,9 +26,13 @@ int main(void)
 		graph[start].push_back(end);
 		graph[end].push_back(start);
 	}
-	vector<bool> visited(vertices, false);
+	/*vector<bool> visited(vertices, false);
 	
 	if(dfs(graph, visited, 0))
+		cout<<"CYCLE"<<endl;
+	else
+		cout<<"NOT CYCLE"<<endl;*/
+	if(edges>=vertices)
 		cout<<"CYCLE"<<endl;
 	else
 		cout<<"NOT CYCLE"<<endl;
