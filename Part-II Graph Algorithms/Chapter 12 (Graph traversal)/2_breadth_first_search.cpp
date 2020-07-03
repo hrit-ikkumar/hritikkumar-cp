@@ -37,9 +37,9 @@ int main(void)
 
 vector<int> bfs(vector<vector<int>> &graph,  int current)
 {
-	vector<bool> visited(graph.size(), false);
 	vector<int> ans(0);
-	
+	vector<bool> visited(graph.size(), false);
+	vector<int> distance(graph.size(),0);
 	queue<int> q; q.push(current);
 	while(!q.empty())
 	{
@@ -49,10 +49,19 @@ vector<int> bfs(vector<vector<int>> &graph,  int current)
 			for(int i=0;i<(signed)graph[q.front()].size();i++)
 			{
 				if(!visited[graph[q.front()][i]])
+				{
 					q.push(graph[q.front()][i]);
+					distance[graph[q.front()][i]] = distance[q.front()] + 1;
+				}
 			}
 		}
 		q.pop();
 	}
+	cout<<"Node"<<"   "<<"Distance"<<endl;
+	for(int i=0;i<(signed)distance.size();i++)
+	{
+		cout<<i<<":     "<<distance[i]<<endl;
+	}
+	cout<<endl;
 	return ans;
 }
