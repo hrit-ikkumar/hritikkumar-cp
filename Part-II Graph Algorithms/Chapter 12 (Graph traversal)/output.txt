@@ -1,1 +1,1 @@
-NOT CYCLE
+1 0 1 
