@@ -1,4 +1,3 @@
-
 // @hritikkumar
 
 #include<bits/stdc++.h> // all header files
@@ -7,7 +6,7 @@
 
 using namespace std; // namespace created as std
 
-bool negativeCycleBellmanFord(vector<tuple<int, int, int>> &, int, int);
+vector<long long int> bellmanFordSPGraph(multiset<tuple<int, int, int>> &, int, int);
 
 int main(void)
 {
@@ -20,21 +19,24 @@ int main(void)
 	
 	int vertices, edges;
 	cin>>vertices>>edges;
-	vector<tuple<int, int ,int>> graph_edges;//undirected & weighted
+	multiset<tuple<int, int ,int>> graph_edges;//undirected & weighted
 	for(int i=0;i<edges;i++)
 	{
 		int start, end, weight;
 		cin>>start>>end>>weight;
-		graph_edges.push_back({weight, start, end});
+		graph_edges.insert({weight, start, end});
 	}
 	
-	bool ans = negativeCycleBellmanFord(graph_edges, vertices, edges);
-	if(ans) cout<<"Yes, There is a negative cycle!"<<endl;
-	else	cout<<"No, There is no negative cycle!"<<endl;
+	vector<long long int> ans = bellmanFordSPGraph(graph_edges, vertices, edges);
+	cout<<"Vertices   Distance"<<endl;
+	for(unsigned int i = 0;i<ans.size();i++)
+	{
+		cout<<i<<":         "<<ans[i]<<endl;
+	}
 	return 0; // return type is int
 }
 
-bool negativeCycleBellmanFord(vector<tuple<int, int, int>> &graph_edges, int vertices, int edges)
+vector<long long int> bellmanFordSPGraph(multiset<tuple<int, int, int>> &graph_edges, int vertices, int edges)
 {
 	vector<long long int> distance(vertices, (long long int) INT_MAX);
 	distance[0] = 0;
@@ -47,12 +49,5 @@ bool negativeCycleBellmanFord(vector<tuple<int, int, int>> &graph_edges, int ver
 			distance[end] = min(distance[end], distance[start] + weight);
 		}
 	}
-	for(auto e: graph_edges)
-	{
-		int start, end, weight;
-		tie(weight, start, end) = e;
-		if(distance[end] > distance[start] + weight)
-			return true;
-	}
-	return false;
+	return distance;
 }

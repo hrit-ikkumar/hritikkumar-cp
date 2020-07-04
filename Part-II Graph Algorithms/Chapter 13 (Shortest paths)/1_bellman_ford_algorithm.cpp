@@ -6,7 +6,7 @@
 
 using namespace std; // namespace created as std
 
-vector<long long int> bellmanFordSPGraph(multiset<tuple<int, int, int>> &, int, int);
+vector<long long int> bellmanFordSPGraph(vector<tuple<int, int, int>> &, int, int);
 
 int main(void)
 {
@@ -19,12 +19,12 @@ int main(void)
 	
 	int vertices, edges;
 	cin>>vertices>>edges;
-	multiset<tuple<int, int ,int>> graph_edges;//undirected & weighted
+	vector<tuple<int, int ,int>> graph_edges;//undirected & weighted
 	for(int i=0;i<edges;i++)
 	{
 		int start, end, weight;
 		cin>>start>>end>>weight;
-		graph_edges.insert({weight, start, end});
+		graph_edges.push_back({weight, start, end});
 	}
 	
 	vector<long long int> ans = bellmanFordSPGraph(graph_edges, vertices, edges);
@@ -36,7 +36,7 @@ int main(void)
 	return 0; // return type is int
 }
 
-vector<long long int> bellmanFordSPGraph(multiset<tuple<int, int, int>> &graph_edges, int vertices, int edges)
+vector<long long int> bellmanFordSPGraph(vector<tuple<int, int, int>> &graph_edges, int vertices, int edges)
 {
 	vector<long long int> distance(vertices, (long long int) INT_MAX);
 	distance[0] = 0;
