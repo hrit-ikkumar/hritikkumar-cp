@@ -14,6 +14,16 @@ int main(void)
 	freopen("output.txt", "w", stdout);
 	#endif
 	
+	int vertices, edges;
+	cin>>vertices>>edges;
+	vector<vector<pair<int,int>>> graph(vertices);
+	while(edges--)
+	{
+		int start, end, weight;
+		cin>>start>>end>>weight;
+		graph[start].push_back({end, weight});
+		graph[end].push_back({start, weight});
+	}
 	
 	return 0; // return type is int
 }
