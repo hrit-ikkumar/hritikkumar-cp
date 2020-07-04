@@ -1,6 +1,1 @@
-Vertices   Distance
-0:         0
-1:         5
-2:         3
-3:         4
-4:         6
+No, There is no negative cycle!
