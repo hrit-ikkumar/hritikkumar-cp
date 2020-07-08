@@ -13,8 +13,16 @@ int main(void)
 	freopen("input.txt", "r", stdin);
 	freopen("output.xt", "w", stdout);
 	#endif
-	
-	
+	int vertices, edges;
+	cin>>vertices>>edges;
+	vector<vector<int>> graph(vertices,vector<int>);
+	for(int i=0;i<edges;i++)
+	{
+		int start, end;
+		cin>>start>>end;
+		graph[start].push_back(end);
+	}
+	vector<int> toLeaf(vertices, 0), maxLength(vertices, 0);
 	
 	return 0; // return type is int
 }
