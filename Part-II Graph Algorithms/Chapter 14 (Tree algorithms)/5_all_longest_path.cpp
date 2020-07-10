@@ -14,5 +14,5 @@ int main(void)
 	freopen("output.txt", "w", stdout);
 	#endif
 	
-	return 0; // return type is int 
+	
 }
