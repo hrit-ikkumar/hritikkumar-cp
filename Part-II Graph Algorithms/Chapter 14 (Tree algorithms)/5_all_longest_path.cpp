@@ -14,5 +14,4 @@ int main(void)
 	freopen("output.txt", "w", stdout);
 	#endif
 	
-	
 }
