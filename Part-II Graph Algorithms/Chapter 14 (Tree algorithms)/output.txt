@@ -1,1 +1,3 @@
-4
+PRE-ORDER: 0 1 3 4 5 2 6 
+IN-ORDER: 3 1 5 4 0 2 6 
+POST-ORDER: 3 5 4 1 6 2 0 
