@@ -13,5 +13,13 @@ int main(void)
 	freopen("input.txt", "r", stdin);
 	freopen("output.txt", "w", stdout);
 	#endif
-	
+	int vertices, edges;
+	cin>>vertices>>edges;
+	vector<vector<int>> graph(vertices, vector<int>());
+	for(int i=0;i<edges;i++)
+	{
+		int start, end;
+		cin>>start>>end;
+		graph[start].push_back(end);
+	}
 }
