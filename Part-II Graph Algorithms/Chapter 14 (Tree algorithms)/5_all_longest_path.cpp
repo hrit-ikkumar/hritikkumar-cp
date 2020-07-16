@@ -22,4 +22,7 @@ int main(void)
 		cin>>start>>end;
 		graph[start].push_back(end);
 	}
+	
+	
+	
 }
