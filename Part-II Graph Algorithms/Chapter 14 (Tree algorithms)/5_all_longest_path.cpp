@@ -23,6 +23,4 @@ int main(void)
 		graph[start].push_back(end);
 	}
 	
-	
-	
 }
