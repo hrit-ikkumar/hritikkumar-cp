@@ -25,7 +25,7 @@ int main(void)
 		graph[start].push_back({end, weight});
 	}
 	vector<vector<pair<int, int>>> minimalSpanningTree = primsAlgorithm(graph, vertices);
-	for(int i=0;i<minimalSpanningTree.size();++i)
+	for(int i=0;i<(signed) minimalSpanningTree.size();++i)
 	{
 		cout<<i<<": ";
 		for(auto u: minimalSpanningTree[i])
@@ -41,7 +41,29 @@ vector<vector<pair<int, int>>> primsAlgorithm(vector<vector<pair<int, int>>> &gr
 {
 	vector<vector<pair<int, int>>> minimalSpanningTree(vertices, vector<pair<int, int>>(0));
 	
+	int source = 0;
+	vector<int> key(vertices, INT_MAX);
+	vector<int> parent(vertices, -1); 
+	vector<bool> visited(vertices, false);
+	priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
 	
+	pq.push({0, source});
+	key[source] = 0;
 	
+	while(!pq.empty())
+	{
+		int start = pq.top().second; pq.pop();
+		visited[start] = true;
+		for(auto u: graph[start])
+		{
+			int end = u.first, weight = u.second;
+			if(!visited[end] && key[end] > weight)
+			{
+				key[end] = weight;
+				pq.push({key[end], end});
+				parent[end] = start;
+			}
+		}
+	}
 	return minimalSpanningTree;
 }
