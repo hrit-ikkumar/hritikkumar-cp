@@ -5,15 +5,36 @@
 #define endl '\n'
 
 using namespace std; // namespace created as std
+// Union-Find Data Structure (Disjoint Set) 
+struct subset
+{
+	int parent, rank;
+};
+
+int findParent(int root, vector<subset> &parent)
+{
+	if(root == parent[root].parent)
+		return parent[root].parent;
+	return parent[root].parent = findParent(parent[root].parent, parent);
+}
+
+void unionParent(vector<subset> &parent, int x, int y)
+{
+	int xRoot = findParent(x, parent);
+	int yRoot = findParent( y, parent);
+	
+	if(parent[xRoot].rank < parent[yRoot].rank)
+		parent[xRoot].parent = yRoot;
+	else if(parent[xRoot].rank > parent[yRoot].rank)
+		parent[yRoot].parent = xRoot;
+	else
+	{
+		parent[yRoot].parent = xRoot;
+		parent[xRoot].rank++;
+	}
+}
 
 vector<vector<pair<int, int>>> kruskalMinimalSpanningTreeFun(priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, greater<tuple<int, int, int>>> &, int);
-
-int findParent(int root, vector<int> &parent)
-{
-	if(root == parent[root])
-		return root;
-	return findParent(parent[root], parent);
-}
 
 int main(void)
 {
@@ -48,19 +69,18 @@ int main(void)
 vector<vector<pair<int, int>>> kruskalMinimalSpanningTreeFun(priority_queue<tuple<int, int, int>, vector<tuple<int, int, int>>, greater<tuple<int, int, int>>> &graph, int vertices)
 {
 	vector<vector<pair<int, int>>> minimul_spanning_tree(vertices, vector<pair<int, int>>(0)); // minimum spanning tree graph
-	vector<int> parent(vertices); 
-	for(int i=0;i<vertices;i++) parent[i] = i;
+	vector<subset> parent(vertices); 
+	for(int i=0;i<vertices;i++) parent[i].parent = i, parent[i].rank = 0;
 	while(!graph.empty())
 	{
 		int start, end, weight;
 		start = get<1>(graph.top()), end = get<2>(graph.top()), weight = get<0>(graph.top());
 		graph.pop();
-		cout<<start<<" "<<end<<" "<<weight<<endl;
 		int startParent = findParent(start, parent), endParent = findParent(end, parent);
 		if(startParent != endParent)
 		{
 			minimul_spanning_tree[start].push_back({end, weight});
-			parent[startParent] = endParent;
+			unionParent(parent, startParent, endParent);
 		}
 	}
 	return minimul_spanning_tree;
