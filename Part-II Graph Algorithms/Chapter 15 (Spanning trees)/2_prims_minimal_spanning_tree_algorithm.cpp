@@ -30,7 +30,7 @@ int main(void)
 	{
 		cout<<i<<": ";
 		auto u =  minimalSpanningTree[i];
-		cout<<"{"<<u.first<<", "<<u.second<<"} "<<endl;
+		cout<<"{"<<u.first<<", "<<u.second<<"}"<<endl;
 	}
 	return 0; // return type is int
 }
