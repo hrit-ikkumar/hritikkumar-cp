@@ -6,7 +6,7 @@
 
 using namespace std; // namespace created as std
 
-vector<vector<pair<int, int>>> primsAlgorithm(vector<vector<pair<int, int>>> &, int);
+vector<pair<int, int>> primsAlgorithm(vector<vector<pair<int, int>>> &, int);
 
 int main(void)
 {
@@ -23,23 +23,21 @@ int main(void)
 		int start, end, weight;
 		cin>>start>>end>>weight;
 		graph[start].push_back({end, weight});
+		graph[end].push_back({start, weight});
 	}
-	vector<vector<pair<int, int>>> minimalSpanningTree = primsAlgorithm(graph, vertices);
+	vector<pair<int, int>> minimalSpanningTree = primsAlgorithm(graph, vertices);
 	for(int i=0;i<(signed) minimalSpanningTree.size();++i)
 	{
 		cout<<i<<": ";
-		for(auto u: minimalSpanningTree[i])
-		{
-			cout<<"{"<<u.first<<", "<<u.second<<"} ";
-		}
-		cout<<endl;
+		auto u =  minimalSpanningTree[i];
+		cout<<"{"<<u.first<<", "<<u.second<<"} "<<endl;
 	}
 	return 0; // return type is int
 }
 
-vector<vector<pair<int, int>>> primsAlgorithm(vector<vector<pair<int, int>>> &graph, int vertices)
+vector<pair<int, int>> primsAlgorithm(vector<vector<pair<int, int>>> &graph, int vertices)
 {
-	vector<vector<pair<int, int>>> minimalSpanningTree(vertices, vector<pair<int, int>>(0));
+	vector<pair<int, int>> minimalSpanningTree(vertices);
 	
 	int source = 0;
 	vector<int> key(vertices, INT_MAX);
@@ -61,7 +59,7 @@ vector<vector<pair<int, int>>> primsAlgorithm(vector<vector<pair<int, int>>> &gr
 			{
 				key[end] = weight;
 				pq.push({key[end], end});
-				parent[end] = start;
+				minimalSpanningTree[end]={start, weight};
 			}
 		}
 	}
