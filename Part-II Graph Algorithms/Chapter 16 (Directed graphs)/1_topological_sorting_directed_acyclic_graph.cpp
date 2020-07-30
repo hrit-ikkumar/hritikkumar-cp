@@ -16,6 +16,13 @@ int main(void)
 	
 	int vertices, edges;
 	cin>>vertices>>edges;
+	vector<vector<int>> graph(vertices, vector<int>(0));
+	for(int i=0;i<edges;i++)
+	{
+		int start, end;
+		cin>>start>>end;
+		graph[start].push_back(end);
+	}
 	
 	
 	return 0; // return type is int
