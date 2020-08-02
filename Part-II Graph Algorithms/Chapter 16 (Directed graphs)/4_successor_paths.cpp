@@ -42,7 +42,19 @@ int main(void)
 	
 	// Successor from all possiblities
 	// succ(x, k) from k to x (k -> x)
-	
+	vector<vector<int>> succ_x_k(vertices, vector<int>(vertices, 0)) = succPathXKFun(graph, successor);
+	cout<<"  ";
+	for(int i=0;i<n;i++)
+	cout<<i<<" ";
+	for(int i=0;i<n;i++)
+	{
+		cout<<i<<" ";
+		for(int j=0;j<(signed) succ_x_k.size(); ++j)
+		{
+			cout<<succ_x_k[i][j]<<" ";
+		}
+		cout<<endl;
+	}
 	return 0; // return type is int
 }
 
