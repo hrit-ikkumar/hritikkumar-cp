@@ -6,8 +6,10 @@
 
 using namespace std; // namespace created as std 
 
-void dfs(vector<vector<int>> &,int, vector<int> &);
+void dfsXK(vector<vector<int>> & , int ,int ,vector<vector<int>> &, vector<int> &);
+vector<vector<int>> succPathXKFun(vector<vector<int>> &, vector<int> &);
 
+void dfs(vector<vector<int>> &,int, vector<int> &);
 vector<int> succPathFun(vector<vector<int>> &);
 
 int main(void)
@@ -27,8 +29,7 @@ int main(void)
 		graph[start].push_back(end);
 	}
 	// Successor Graph or Functional Graphs
-	/*
-	 * Out-Degree = 1
+	/* Out-Degree = 1
 	 * Cotain Multiple Component and in each one of those component, there will be only one cycle.
 	 */
 	// Successor from Node = 1
@@ -37,25 +38,56 @@ int main(void)
 	cout<<i+1<<" ";
 	cout<<endl;
 	for(int x: successor)
-	cout<<x<<" ";
-	cout<<endl;
+	cout<<x+1<<" ";
+	cout<<endl<<endl;
 	
 	// Successor from all possiblities
 	// succ(x, k) from k to x (k -> x)
-	vector<vector<int>> succ_x_k(vertices, vector<int>(vertices, 0)) = succPathXKFun(graph, successor);
-	cout<<"  ";
-	for(int i=0;i<n;i++)
+	vector<vector<int>> succ_x_k = succPathXKFun(graph, successor);
+	cout<<"   ";
+	for(int i=0;i<vertices;i++)
 	cout<<i<<" ";
-	for(int i=0;i<n;i++)
+	cout<<endl;
+	for(int i=1;i<vertices;i++)
 	{
 		cout<<i<<" ";
-		for(int j=0;j<(signed) succ_x_k.size(); ++j)
+		for(int j=1;j<(signed) vertices; ++j)
 		{
 			cout<<succ_x_k[i][j]<<" ";
 		}
 		cout<<endl;
 	}
 	return 0; // return type is int
+}
+
+void dfsXK(vector<vector<int>> &graph, int row, int col, vector<vector<int>> &ans, vector<int> &succ)
+{
+	if(ans[row][col] == -1)
+	{
+		if(col == 1)
+		{
+			ans[row][col] = succ[col-1];
+		}
+		else if(col > 1)
+		{
+			dfsXK(graph, row, col/2, ans, succ);
+			dfsXK(graph, ans[row][col/2], col/2, ans, succ);
+			ans[row][col] = ans[ans[row][col/2]][col/2];
+		}
+	}
+}
+
+vector<vector<int>> succPathXKFun(vector<vector<int>> &graph, vector<int> &succ)
+{
+	vector<vector<int>> ans(graph.size(), vector<int>(graph.size()+1, -1));
+	for(int row=1;row<(signed) graph.size();row++)
+	{
+		for(int col=1; col < (signed)graph.size(); col*=2)
+		{
+			dfsXK(graph, row,col, ans, succ);
+		}
+	}
+	return ans;
 }
 
 void dfs(vector<vector<int>> &graph,int root, vector<int> &succ)
