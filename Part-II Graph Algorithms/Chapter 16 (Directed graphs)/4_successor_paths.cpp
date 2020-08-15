@@ -44,14 +44,14 @@ int main(void)
 	// Successor from all possiblities
 	// succ(x, k) from k to x (k -> x)
 	vector<vector<int>> succ_x_k = succPathXKFun(graph, successor);
-	cout<<"   ";
-	for(int i=0;i<vertices;i++)
+	cout<<"  ";
+	for(int i=1;i<(signed) succ_x_k[0].size();i*=2)
 	cout<<i<<" ";
 	cout<<endl;
-	for(int i=1;i<vertices;i++)
+	for(int i=1;i< (signed)succ_x_k.size();i++)
 	{
 		cout<<i<<" ";
-		for(int j=1;j<(signed) vertices; ++j)
+		for(int j=1;j<(signed) succ_x_k[0].size(); j*=2)
 		{
 			cout<<succ_x_k[i][j]<<" ";
 		}
@@ -61,28 +61,25 @@ int main(void)
 }
 
 void dfsXK(vector<vector<int>> &graph, int row, int col, vector<vector<int>> &ans, vector<int> &succ)
-{
-	if(ans[row][col] == -1)
+{	
+	if(col == 1)
 	{
-		if(col == 1)
-		{
-			ans[row][col] = succ[col-1];
-		}
-		else if(col > 1)
-		{
-			dfsXK(graph, row, col/2, ans, succ);
-			dfsXK(graph, ans[row][col/2], col/2, ans, succ);
-			ans[row][col] = ans[ans[row][col/2]][col/2];
-		}
+		ans[row][col] = succ[row-1]+1;
+	}
+	else if(col > 1)
+	{
+		dfsXK(graph, row, col/2, ans, succ);
+		dfsXK(graph, ans[row][col/2], col/2, ans, succ);
+		ans[row][col] = ans[ans[row][col/2]][col/2];
 	}
 }
 
 vector<vector<int>> succPathXKFun(vector<vector<int>> &graph, vector<int> &succ)
 {
-	vector<vector<int>> ans(graph.size(), vector<int>(graph.size()+1, -1));
-	for(int row=1;row<(signed) graph.size();row++)
+	vector<vector<int>> ans(graph.size()+1, vector<int>(graph.size() + 1, -1));
+	for(int row=1;row<=(signed) graph.size();row++)
 	{
-		for(int col=1; col < (signed)graph.size(); col*=2)
+		for(int col=1; col<= (signed) graph.size(); col*=2)
 		{
 			dfsXK(graph, row,col, ans, succ);
 		}
