@@ -6,6 +6,22 @@
 
 using namespace std; // namespace created as std 
 
+int succ(int x, int k, vector<vector<int>> &successor)
+{
+	int ans = x;
+	int range = pow(2, (int)log2(k));
+	while(range > 0 &&  k >= 1)
+	{
+		if(range <= k)
+		{
+			ans = successor[ans][range];
+			k -= range;
+		}
+		range /= 2;
+	}
+	return ans;
+}
+
 void dfsXK(vector<vector<int>> & , int ,int ,vector<vector<int>> &, vector<int> &);
 vector<vector<int>> succPathXKFun(vector<vector<int>> &, vector<int> &);
 
@@ -57,6 +73,9 @@ int main(void)
 		}
 		cout<<endl;
 	}
+	int x, k;
+	cin>>x>>k; // find the random one 
+	cout<<"succ("<<x<<","<<k<<"): "<<succ(x, k, succ_x_k)<<endl;
 	return 0; // return type is int
 }
 
