@@ -6,15 +6,59 @@
 
 using namespace std; // namespace created as std
 
+void dfsUtil(vector<vector<int>> &graph, int node, stack<int> &stk, vector<bool> &visited)
+{
+	visited[node] = true;
+	for(auto u: graph[node])
+	{
+		if(!visited[u])
+		{
+			dfsUtil(graph, u, stk, visited);
+		}
+	}
+	stk.push(node);
+}
+
+void dfsUtilSC(vector<vector<int>> &reversedGraph, int node, vector<int> &stronglyConnected, vector<bool> &visited)
+{
+	visited[node] = true;
+	stronglyConnected.push_back(node);
+	for(auto u: reversedGraph[node])
+	{
+		if(!visited[u])
+		{
+			dfsUtilSC(reversedGraph, u, stronglyConnected, visited);
+		}
+	}
+}
 
 vector<vector<int>> kosarajuAlgorithm(vector<vector<int>> &graph, vector<vector<int>> &reversedGraph)
 {
-	vector<vector<int>> ans(0);
+	vector<vector<int>> ans;
 	vector<bool> visited(graph.size(), false);
 	stack<int> stk;
 	
+	// fist time dfs
+	for(int node = 0; node < (signed) graph.size(); node++)
+	{
+		if(!visited[node])
+		{
+			dfsUtil(graph, node, stk, visited);
+		}
+	}
 	
-	
+	// second time dfs
+	visited.assign(visited.size(), false);
+	while(!stk.empty())
+	{
+		int currNode = stk.top(); stk.pop();
+		if(!visited[currNode])
+		{
+			vector<int> stronglyConnected;
+			dfsUtilSC(reversedGraph, currNode, stronglyConnected, visited);
+			ans.push_back(stronglyConnected);
+		}
+	}
 	return ans;
 }
 
@@ -34,7 +78,7 @@ int main(void)
 		int start, end;
 		cin>>start>>end;
 		graph[start].push_back(end);
-		reversedGraph[end].push_back(end);
+		reversedGraph[end].push_back(start);
 	}
 	vector<vector<int>> ans = kosarajuAlgorithm(graph, reversedGraph);
 	for(int i=0;i<(signed)ans.size(); i++)
