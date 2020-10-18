@@ -9,11 +9,13 @@ using namespace std; // namespace created as std
 class TreeAncestors
 {
 	private:
+		int head;
 		vector<vector<int>> graph;
 		vector<vector<int>> allAncestors;
 	public:
-		TreeAncestors(vector<vector<int>> graphOD)
+		TreeAncestors(int root, vector<vector<int>> graphOD)
 		{
+			this->head = root;
 			this->graph = graphOD;
 		}
 		
@@ -22,20 +24,66 @@ class TreeAncestors
 			// do nothing
 		}
 		
+		// x's kth ancestor
+		/*int dfsKthAncestor(int root, int x, int k)
+		{
+			if(root == x)
+			{
+				return root;
+			}
+			else if(k == 0)
+			{
+				return -1;
+			}
+			
+			int val = 0;
+			for(int child: graph[root])
+			{
+				int currVal = dfsKthAncestor(child, x, k-1);
+				if( currVal!= -1)
+				{
+					return 
+				}
+			}
+		}
+		*/
+		void dfs(int root)
+		{
+			for(int x: graph[root])
+			{
+				allAncestors[0][x] = root;
+				dfs(x);
+			}
+		}
 		void calcualteTreeAncestors()
 		{
-			allAncestors.resize(ceil(log2(graph.size())), vector<int>(graph.size()));
-			
+			allAncestors.resize(ceil(log2(graph.size())), vector<int>(graph.size(), -1));
+			dfs(head);
+			for(int i=0;i<(signed)allAncestors[0].size();i++)
+			{
+				allAncestors[0][i] +=1;
+			}
+			for(int k=1;k<(signed)allAncestors.size();k++)
+			{
+				for(int node=0;node<(signed)allAncestors[k].size();node++)
+				{
+					// row is k term & col is x term 
+					allAncestors[k][node] = allAncestors[k-1][allAncestors[k-1][node]-1]  ;
+					
+					if(allAncestors[k][node] <= -1)
+						break;
+				}
+			}
 		}
 		
 		void printTreeAncestors()
 		{
 			cout<<"Tree Ancestors"<<endl;
 			
-			cout<<"			"<<endl;
-			for(int i=0;i<(signed)allAncestors.size(); i++)
+			cout<<"	";
+			for(int i=0;i<(signed)allAncestors[0].size(); i++)
 			{
-				cout<<i+1<<" ";
+				cout<<i<<" ";
 			}
 			cout<<endl;
 			for(int i=0;i< (signed)allAncestors.size();i++)
@@ -52,8 +100,16 @@ class TreeAncestors
 		int kthAncestor(int x, int k)
 		{
 			
-			
-			return 0;
+			for(int i=0;i<(signed)allAncestors.size();i++)
+			{
+				if(k & (1 << i))
+				{
+					x = allAncestors[i][x-1] ;
+						if(x == -1)
+							break;
+				}
+			}
+			return x;
 		}
 };
 
@@ -65,8 +121,8 @@ int main(void)
 	freopen("output.txt", "w", stdout);
 	#endif
 	
-	int v, e;
-	cin>>v>>e; // vertices & edges;
+	int v, e, root;
+	cin>>v>>e>>root; // vertices & edges;
 	vector<vector<int>> graphOD(v, vector<int>()); // graph for ordered direction
 	
 	for(int i=0;i<e;i++)
@@ -76,7 +132,7 @@ int main(void)
 		graphOD[start].push_back(end); // start -> end
 	}
 	
-	TreeAncestors* treeAncestors = new TreeAncestors(graphOD); // pointer of TreeAncestors class 
+	TreeAncestors* treeAncestors = new TreeAncestors(root,graphOD); // pointer of TreeAncestors class 
 	
 	treeAncestors->calcualteTreeAncestors(); // calculate all the ancestors of  compressed length (kth in log(n))
 	
