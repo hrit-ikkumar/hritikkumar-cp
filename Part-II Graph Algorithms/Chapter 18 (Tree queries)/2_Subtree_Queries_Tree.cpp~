@@ -23,6 +23,7 @@ class SubTreeQuery
 				graph[start].push_back(end);
 			}
 		}
+		
 };
 
 int main(void)
