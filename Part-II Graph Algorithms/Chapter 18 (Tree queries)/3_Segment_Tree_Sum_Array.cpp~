@@ -10,13 +10,9 @@ class SegmentTree
 		vector<int> arr;
 		vector<int> STarray;
 	public:
-		SegmentTree()
+		SegmentTree(vector<int> a)
 		{
-			int n;
-			cin>>n;
-			arr.resize(n);
-			for(int i=0;i<n;i++)
-				cin>>arr[i];
+			this->arr = a;
 		}
 		
 		int getMid(int start, int end)
