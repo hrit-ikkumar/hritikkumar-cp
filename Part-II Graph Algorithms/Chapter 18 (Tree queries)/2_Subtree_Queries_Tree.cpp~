@@ -33,6 +33,5 @@ int main(void)
 	freopen("input.txt", "r", stdin);
 	freopen("output.txt", "w", stdout);
 	#endif
-	
-	
+	// Segment Tree Problem 
 }
