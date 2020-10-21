@@ -112,8 +112,8 @@ class SegmentTree
 			
 			if(ST_start_range > ST_end_range || ST_start_range > end_index || ST_end_range < start_index)
 				return;
-			
-			if(ST_start_range >= start_index && end_index <= ST_end_range)
+
+			if(ST_start_range >= start_index &&  ST_end_range <= end_index)
 			{
 				STarray[ST_index] += (ST_end_range - ST_start_range + 1)*difference;
 			

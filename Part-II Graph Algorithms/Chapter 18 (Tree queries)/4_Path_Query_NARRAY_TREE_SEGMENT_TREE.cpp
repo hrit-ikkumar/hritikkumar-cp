@@ -269,7 +269,9 @@ int main(void)
 	int node, value;
 	cin>>node >> value;
 	cout<<endl<<endl<<(st->queryPathSum(node))<<endl<<endl;
+	
 	st->updateTREE(node, value);
+	
 	cout<<endl<<endl<<(st->queryPathSum(node))<<endl<<endl;
 	st->print_everything();
 	return 0;
