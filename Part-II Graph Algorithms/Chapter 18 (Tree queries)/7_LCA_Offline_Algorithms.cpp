@@ -6,6 +6,16 @@
 
 using namespace std; // namespace created as std
 
+// Disjoint Set Union concept will be used
+struct dsu_node
+{
+	int parent, rank;
+	dsu_node() {}
+	dsu_node(int p){parent = p;}
+	dsu_node(int p, int r) {parent = p, rank = r;}
+};
+
+
 class LCA_OFFLINE
 {
 	public:
@@ -31,7 +41,6 @@ class LCA_OFFLINE
 		void print_everything()
 		{
 			// all the priting part will be done here...
-			
 		}
 };
 
