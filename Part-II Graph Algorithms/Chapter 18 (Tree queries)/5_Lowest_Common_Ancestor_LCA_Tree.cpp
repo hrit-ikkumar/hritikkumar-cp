@@ -114,15 +114,37 @@ class LCA
 			for(int x: graph[root])
 			{
 				dfs(x, level + 1);
+				dfs_seq.push_back(root);
+				depth_seq.push_back(level);
 			}
-			dfs_seq.push_back(root);
-			depth_seq.push_back(level);
 		}
 		
 		int query(int node1 , int node2)
 		{
-			return segmentTree->queryMin(node1, node2);
+			return segmentTree->queryMin(dfs_seq[node1], dfs_seq[node2]);
 		}
+		
+		int distance(int node1, int node2)
+		{
+			int lca_node = query(node1, node2);
+			int 	node1_depth = depth(this->head, dfs_seq[node1], 1),
+					node2_depth = depth(this->head, dfs_seq[node2], 1),
+					lca_node_depth = depth(this->head, lca_node, 1);
+			return node1_depth + node2_depth - 2 * (lca_node_depth);
+		}
+		
+		int depth(int root, int find_me, int curr_depth)
+		{
+			if(root == find_me)
+				return curr_depth;
+			
+			int ans = 0;
+			for(int x: graph[root])
+				ans = max(ans, depth(x, find_me, curr_depth + 1));
+			
+			return ans;
+		}
+		
 		void print_eveything()
 		{
 			cout<<"DFS_SEQ: 		";
@@ -152,7 +174,9 @@ int main(void)
 	 
 	 int n1, n2;
 	 cin>>n1>>n2;
-	 cout<< lca->query(n1, n2) << endl;
-	 
+	 int LCA_NODE = lca->query(n1, n2);
+	 cout<< "LCA: "<< LCA_NODE << endl;
+	 int dist = lca->distance(n1, n2);
+	 cout<<"DISTANCE: "<<dist<<endl;
 	 return 0; // return type is int
 }
