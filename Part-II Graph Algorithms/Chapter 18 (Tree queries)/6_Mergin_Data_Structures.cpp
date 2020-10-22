@@ -58,8 +58,6 @@ class OfflineAlgoMapTree
 			return graph[node].first -> mp [subNode];
 		}
 		
-		
-		
 		void mergeMaps(unordered_map<int, int> & a, unordered_map<int, int> &b)
 		{
 			for(auto x: b)

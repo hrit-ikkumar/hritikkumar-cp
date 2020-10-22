@@ -54,7 +54,7 @@ class OfflineAlgoMapTree
 		}
 		
 		int query(int node, int subNode)
-		{
+		{ 
 			return graph[node].first -> mp [subNode];
 		}
 		
@@ -96,7 +96,7 @@ class OfflineAlgoMapTree
 				cout<<"{";
 				for(auto t: x.first -> mp)
 					cout<<"["<<t.first<<", "<<t.second<<"],";
-				cout<<"::::";
+				cout<<"}  ::::   ";
 				for(int y: x.second)
 					cout<<y<<" ";
 				cout<<endl;
