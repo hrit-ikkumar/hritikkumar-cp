@@ -40,9 +40,38 @@ class OfflineAlgoMapTree
 				graph[end].first = new node(end);
 				graph[start].second.push_back(end);
 			}
+			
+			dfs(this->head); // dfs for updating the values of map in order to improve the performance of algorithm
+			
+			
 			print_everything();
 		}
 		
+		void mergeMaps(unordered_map<int, int> & a, unordered_map<int, int> &b)
+		{
+			for(auto x: b)
+			{
+				a[x.first] += x.second;
+			}
+		} 
+		
+		unordered_map<int, int> dfsUtil(int root)
+		{
+			unordered_map<int, int> curr;
+			curr[root] += 1;
+			
+			for(int x: graph[root].second)
+			{
+				unordered_map<int, int> childCurr = dfsUtil(x);
+				mergeMaps(curr, childCurr);
+			}
+			return curr;
+		}
+		
+		void dfs(int root)
+		{
+			unordered_map<int, int> dummy = dfsUtil( root);
+		}
 		
 		void print_everything()
 		{
