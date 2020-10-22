@@ -11,6 +11,7 @@ using namespace std; // namespace created as std
 
 struct node
 {
+	int node_val;
 	int val;
 	unordered_map<int, int> mp;
 	
@@ -18,6 +19,11 @@ struct node
 	node(int value)
 	{
 		val = value;
+	}
+	node(int value, int nodeVal)
+	{
+		val = value;
+		node_val = nodeVal;
 	}
 };
 
@@ -34,11 +40,11 @@ class OfflineAlgoMapTree
 			graph.resize(vertices,{new node(), vector<int>()});
 			for(int i=0;i<edges;i++)
 			{
-				int start, end;
-				cin>>start>>end;
-				graph[start].first = new node(start);
-				graph[end].first = new node(end);
-				graph[start].second.push_back(end);
+				int start_node, start_val, end_node, end_val;
+				cin>>start_node>>start_val>>end_node>>end_val;
+				graph[start_node].first = new node(start_node, start_val);
+				graph[end_node].first = new node(end_node, end_val);
+				graph[start_node].second.push_back(end_node);
 			}
 			
 			dfs(this->head); // dfs for updating the values of map in order to improve the performance of algorithm
@@ -46,6 +52,13 @@ class OfflineAlgoMapTree
 			
 			print_everything();
 		}
+		
+		int query(int node, int subNode)
+		{ 
+			return graph[node].first -> mp [subNode];
+		}
+		
+		
 		
 		void mergeMaps(unordered_map<int, int> & a, unordered_map<int, int> &b)
 		{
@@ -58,19 +71,20 @@ class OfflineAlgoMapTree
 		unordered_map<int, int> dfsUtil(int root)
 		{
 			unordered_map<int, int> curr;
-			curr[root] += 1;
+			curr[graph[root].first -> node_val] += 1;
 			
 			for(int x: graph[root].second)
 			{
 				unordered_map<int, int> childCurr = dfsUtil(x);
 				mergeMaps(curr, childCurr);
 			}
+			graph[root].first -> mp = curr;
 			return curr;
 		}
 		
 		void dfs(int root)
 		{
-			unordered_map<int, int> dummy = dfsUtil( root);
+			graph[root].first -> mp = dfsUtil( root);
 		}
 		
 		void print_everything()
@@ -79,6 +93,10 @@ class OfflineAlgoMapTree
 			for(auto x: graph)
 			{
 				cout<<(x.first)->val<<" => ";
+				cout<<"{";
+				for(auto t: x.first -> mp)
+					cout<<"["<<t.first<<", "<<t.second<<"],";
+				cout<<"}  ::::   ";
 				for(int y: x.second)
 					cout<<y<<" ";
 				cout<<endl;
@@ -94,6 +112,8 @@ int main(void)
 	freopen("output.txt", "w", stdout);
 	#endif
 	OfflineAlgoMapTree* tree = new OfflineAlgoMapTree();
-	
+	int NODE, SUBNODE;
+	cin>>NODE>>SUBNODE;
+	cout<<"ans: "<<tree->query(NODE, SUBNODE)<<endl;
 	return 0; // return type is int
 }
