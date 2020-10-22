@@ -6,6 +6,35 @@
 
 using namespace std; // namespace created as std
 
+class LCA_OFFLINE
+{
+	public:
+		// data members
+		vector<vector<int>> graph;
+		int vertices, edges, head;
+	
+	public:
+		LCA_OFFLINE()
+		{
+			// default values will be set here
+			cin	>>	this->vertices 	>>	this->edges	>> this->head;
+			for(int i=0;i<edges;i++)
+			{
+				int start, end;
+				cin>>start>>end;
+				graph[start].push_back(end); // adjacency list rep
+			}
+			
+			print_everything(); // for debugging purpose
+		}
+		
+		void print_everything()
+		{
+			// all the priting part will be done here...
+			
+		}
+};
+
 int main(void)
 {
 	std::ios::sync_with_stdio(false); cin.tie(0); cout.tie(0); // fastio
@@ -14,6 +43,7 @@ int main(void)
 	freopen("output.txt", "w", stdout);
 	#endif
 	
+	LCA_OFFLINE *lca = new LCA_OFFLINE();
 	
 	return 0; // return type is int
 }
