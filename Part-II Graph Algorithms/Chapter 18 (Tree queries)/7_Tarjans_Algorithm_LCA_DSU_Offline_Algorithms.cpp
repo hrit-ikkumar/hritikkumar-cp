@@ -7,14 +7,41 @@
 using namespace std; // namespace created as std
 
 // Disjoint Set Union concept will be used
-struct dsu_node
-{
-	int parent, rank;
-	dsu_node() {}
-	dsu_node(int p){parent = p;}
-	dsu_node(int p, int r) {parent = p, rank = r;}
-};
 
+class DSU
+{
+	public:
+		struct dsu_node
+		{
+			int parent=-1, rank;
+			dsu_node() {}
+			dsu_node(int p){parent = p;}
+			dsu_node(int p, int r) {parent = p, rank = r;}
+		};
+		vector<dsu_node* > dsu;
+	public:
+		DSU(){}
+		DSU(int size)
+		{
+			dsu.resize(size);
+			for(int i=0;i<size;i++)
+			{
+				dsu[i] = new dsu_node(i, 0);
+			}
+			
+			print_dsu();
+		}
+		
+		void print_dsu()
+		{
+			cout<<"DSU: ";
+			for(int i = 0;i <(signed)dsu.size();i++)
+			{
+				cout<<"{"<<i<<" => ["<< dsu[i]->rank<<","<<dsu[i]->parent<<"]}"<<"	";
+			}
+			cout<<endl;
+		}
+};
 
 class LCA_OFFLINE
 {
@@ -22,7 +49,7 @@ class LCA_OFFLINE
 		// data members
 		vector<vector<int>> graph;
 		int vertices, edges, head;
-	
+		
 	public:
 		LCA_OFFLINE()
 		{
@@ -37,6 +64,31 @@ class LCA_OFFLINE
 			}
 			
 			print_everything(); // for debugging purpose
+		}
+
+		int findDSU(int node)
+		{
+			if(dsu[node] -> parent != node)
+			{
+				dsu[node].parent = find(dsu[node].parent);
+			}
+			return dsu[node].parent;
+		}
+		
+		void unionDSU(int node1, int node2)
+		{
+			int node1_root = find(node1),
+				  node2_root = find(node2);
+			
+			if(dsu[node1_root]->rank < dsu[node2_root] ->rank)
+				dsu[node1_root] -> parent = node2_root;
+			else if(dsu[node1_root]->rank > dsu[node2_root]->rank)
+				dsu[node2_root] -> parent = node2_root;
+			else
+			{
+				dsu[node2_root] -> parent = node1_root;
+				dsu[node1_root] -> rank += 1; // incremented the rank in DSU (Path compression technique is incorporated
+			}
 		}
 		
 		void print_everything()
