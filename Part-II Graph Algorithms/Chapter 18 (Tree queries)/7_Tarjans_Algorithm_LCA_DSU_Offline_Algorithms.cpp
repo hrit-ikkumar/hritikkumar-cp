@@ -28,6 +28,7 @@ class LCA_OFFLINE
 		{
 			// default values will be set here
 			cin	>>	this->vertices 	>>	this->edges	>> this->head;
+			graph.resize(this->vertices);
 			for(int i=0;i<edges;i++)
 			{
 				int start, end;
