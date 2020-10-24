@@ -8,7 +8,6 @@ using namespace std; // namespace created as std
 
 // Disjoint Set Union concept will be used
 
-
 class DSU
 {
 	public:
@@ -50,7 +49,7 @@ class LCA_OFFLINE
 		// data members
 		vector<vector<int>> graph;
 		int vertices, edges, head;
-	
+		
 	public:
 		LCA_OFFLINE()
 		{
