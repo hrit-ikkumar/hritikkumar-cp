@@ -32,6 +32,31 @@ class DSU
 			print_dsu();
 		}
 		
+		int findDSU(int node)
+		{
+			if(dsu[node] -> parent != node)
+			{
+				dsu[node].parent = find(dsu[node].parent);
+			}
+			return dsu[node].parent;
+		}
+		
+		void unionDSU(int node1, int node2)
+		{
+			int node1_root = find(node1),
+				  node2_root = find(node2);
+			
+			if(dsu[node1_root]->rank < dsu[node2_root] ->rank)
+				dsu[node1_root] -> parent = node2_root;
+			else if(dsu[node1_root]->rank > dsu[node2_root]->rank)
+				dsu[node2_root] -> parent = node2_root;
+			else
+			{
+				dsu[node2_root] -> parent = node1_root;
+				dsu[node1_root] -> rank += 1; // incremented the rank in DSU (Path compression technique is incorporated
+			}
+		}
+		
 		void print_dsu()
 		{
 			cout<<"DSU: ";
@@ -66,30 +91,6 @@ class LCA_OFFLINE
 			print_everything(); // for debugging purpose
 		}
 
-		int findDSU(int node)
-		{
-			if(dsu[node] -> parent != node)
-			{
-				dsu[node].parent = find(dsu[node].parent);
-			}
-			return dsu[node].parent;
-		}
-		
-		void unionDSU(int node1, int node2)
-		{
-			int node1_root = find(node1),
-				  node2_root = find(node2);
-			
-			if(dsu[node1_root]->rank < dsu[node2_root] ->rank)
-				dsu[node1_root] -> parent = node2_root;
-			else if(dsu[node1_root]->rank > dsu[node2_root]->rank)
-				dsu[node2_root] -> parent = node2_root;
-			else
-			{
-				dsu[node2_root] -> parent = node1_root;
-				dsu[node1_root] -> rank += 1; // incremented the rank in DSU (Path compression technique is incorporated
-			}
-		}
 		
 		void print_everything()
 		{
