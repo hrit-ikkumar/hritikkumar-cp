@@ -95,6 +95,7 @@ class LCA_OFFLINE
 		void print_everything()
 		{
 			// all the priting part will be done here...
+			cout<<"PRINT"<<endl;
 		}
 };
 

@@ -18,7 +18,9 @@ class DSU
 			dsu_node(int p){parent = p;}
 			dsu_node(int p, int r) {parent = p, rank = r;}
 		};
+		
 		vector<dsu_node* > dsu;
+		
 	public:
 		DSU(){}
 		DSU(int size)
