@@ -20,7 +20,7 @@ class DSU
 		};
 		
 		vector<dsu_node* > dsu;
-		
+
 	public:
 		DSU(){}
 		DSU(int size)

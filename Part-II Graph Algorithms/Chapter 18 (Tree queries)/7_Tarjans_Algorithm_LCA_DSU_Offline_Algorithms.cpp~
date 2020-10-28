@@ -6,7 +6,7 @@
 
 using namespace std; // namespace created as std
 
-// Disjoint Set Union concept will be used
+// Disjoint Set Union concept will be used in Tarjan's Algorithm
 
 class DSU
 {
