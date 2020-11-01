@@ -37,15 +37,15 @@ class DSU
 		{
 			if(dsu[node] -> parent != node)
 			{
-				dsu[node].parent = find(dsu[node].parent);
+				dsu[node]->parent = findDSU(dsu[node]->parent);
 			}
-			return dsu[node].parent;
+			return dsu[node]->parent;
 		}
 		
 		void unionDSU(int node1, int node2)
 		{
-			int node1_root = find(node1),
-				  node2_root = find(node2);
+			int node1_root = findDSU(node1),
+				  node2_root = findDSU(node2);
 			
 			if(dsu[node1_root]->rank < dsu[node2_root] ->rank)
 				dsu[node1_root] -> parent = node2_root;
@@ -53,8 +53,8 @@ class DSU
 				dsu[node2_root] -> parent = node2_root;
 			else
 			{
-				dsu[node2_root] -> parent = node1_root;
-				dsu[node1_root] -> rank += 1; // incremented the rank in DSU (Path compression technique is incorporated
+				dsu[node1_root] -> parent = node2_root;
+				dsu[node2_root] -> rank += 1; // incremented the rank in DSU (Path compression technique is incorporated
 			}
 		}
 		
@@ -74,6 +74,7 @@ class LCA_OFFLINE
 	public:
 		// data members
 		vector<vector<int>> graph;
+		vector<vector<int>> queries;
 		int vertices, edges, head;
 		
 	public:
@@ -88,10 +89,55 @@ class LCA_OFFLINE
 				cin>>start>>end;
 				graph[start].push_back(end); // adjacency list rep
 			}
-			
+			takeInputQueries();
+			dfsMaster(this->head);
 			print_everything(); // for debugging purpose
 		}
-
+		
+		void dfs(vector<int> &ancestor, vector<bool> &visited, int root, DSU *dsu_ds)
+		{
+			visited[root] = true;
+			ancestor[root] = root;
+			for(int v : graph[root])
+			{
+				if(!visited[v])
+				{
+					dfs(ancestor, visited, v, dsu_ds);
+					dsu_ds->unionDSU(root, v);
+					ancestor[dsu_ds->findDSU(root)] = root;
+				}
+			}
+			for(int other_node: queries[root])
+			{
+				if(visited[other_node])
+				{
+					cout<<"LCA of "<<root<<" and "<<other_node<<" is " <<ancestor[dsu_ds->findDSU(other_node)] << "."<<endl;
+				}
+			}
+		}
+		
+		void dfsMaster(int root)
+		{
+			vector<int> ancestor(this->vertices, this->head);
+			vector<bool> visited(this->vertices, false);
+			DSU *dsu_ds = new DSU(this->vertices);
+			dfs(ancestor, visited, root, dsu_ds);
+			dsu_ds -> print_dsu();
+		}
+		
+		void takeInputQueries()
+		{
+			int totalQuery;
+			cin>>totalQuery;
+			queries.resize(this->vertices);
+			while(totalQuery--)
+			{
+				int first, second;
+				cin>>first>>second;
+				queries[first].push_back(second);
+				queries[second].push_back(first);
+			}
+		}
 		
 		void print_everything()
 		{
