@@ -30,7 +30,6 @@ class DSU
 			{
 				dsu[i] = new dsu_node(i, 0);
 			}
-			
 			print_dsu();
 		}
 		

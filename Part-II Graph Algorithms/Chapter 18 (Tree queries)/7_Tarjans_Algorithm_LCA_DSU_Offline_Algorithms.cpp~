@@ -29,7 +29,6 @@ class DSU
 			for(int i=0;i<size;i++)
 			{
 				dsu[i] = new dsu_node(i, 0);
-				
 			}
 			
 			print_dsu();
