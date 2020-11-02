@@ -7,7 +7,11 @@
 using namespace std; // namespace created as std
 
 /*
- Eurelian Path consist or not 
+	Graph								Unordered Graph																								Ordered Graph
+	
+	Eulerian Circuit (EC		Every Vertex has an even degree																		Every Vertex has equal indegree and outdegree
+	
+	Eulerian Path	(EP)			Every Vertex has an even degree or exactly two vertices has odd degree			At most one Vertex has (outdegree - indegree) = 1 and one Vertex has (indegree - outdegree) = 1 and all other vertices have equal indegree and outdegree
  */
 
 
