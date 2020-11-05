@@ -1,1 +1,27 @@
+GRAPH: 
+NODE - 0: 1 
+NODE - 1: 4 2 
+NODE - 2: 0 3 5 
+NODE - 3: 6 
+NODE - 4: 5 
+NODE - 5: 1 2 
+NODE - 6: 5 
+
+inDegrees:
+0: 1
+1: 2
+2: 2
+3: 1
+4: 1
+5: 3
+6: 1
+
+outDegrees:
+0: 1
+1: 2
+2: 3
+3: 1
+4: 1
+5: 2
+6: 1
 

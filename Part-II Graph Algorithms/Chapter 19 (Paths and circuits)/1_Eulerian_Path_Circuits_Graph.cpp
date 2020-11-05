@@ -7,18 +7,88 @@
 using namespace std; // namespace created as std
 
 /*
+ * 	For unordered Graph, We must have strongly connected component only one
 	Graph								Unordered Graph																								Ordered Graph
 	
 	Eulerian Circuit (EC		Every Vertex has an even degree																		Every Vertex has equal indegree and outdegree
 	
 	Eulerian Path	(EP)			Every Vertex has an even degree or exactly two vertices has odd degree			At most one Vertex has (outdegree - indegree) = 1 and one Vertex has (indegree - outdegree) = 1 and all other vertices have equal indegree and outdegree
  */
-
+// Hierholzer's Algorithm works only for Directed Graphs
 
 class EuleiranPathGraph
 {
 	public:
-		vector<vector<int>> graph
+		vector<vector<int>> graph;
+		vector<int> inDegree, outDegree;
+		int vertices, edges;
+	public:
+		EuleiranPathGraph() {}
+		EuleiranPathGraph(int v, int e,vector<vector<int>> dirGraph)
+		{
+			this->vertices = v;
+			this->edges = e;
+			this->graph = dirGraph;
+			this->inDegree.resize(this->vertices, 0);
+			this->outDegree.resize(this->vertices, 0);
+		}
+		
+		void runScript()
+		{
+			calculateDegres(); // calculate all the indegress and outdegrees  of directed graph
+			printEverything(); // checking for in and out degree is correct or not?
+			if(checkWheaterWeCan FindEulerianPath())
+			{
+				// do something here
+			}
+			else
+			{
+				cout<<"Can not find the eulerian path in given graph..."<<endl;
+				return;
+			}
+		}
+		
+		void calculateDegres()
+		{
+			for(int node = 0; node < vertices; node++)
+			{
+				for(int child:graph[node])
+				{
+					this->outDegree[node] += 1;
+					this->inDegree[child] += 1;
+				}
+			}
+		}
+		
+		bool checkWheaterWeCan
+		
+		void printEverything()
+		{
+			cout<<"GRAPH: "<<endl;
+			for(int node = 0; node < vertices; node++)
+			{
+				cout<<"NODE - "<<node<<": ";
+				for(int child:graph[node])
+					cout<<child<<" ";
+				cout<<endl;
+			}
+			cout<<endl;
+			
+			cout<<"inDegrees:"<<endl;
+			for(int node = 0; node < vertices; node ++)
+			{
+				cout<<node<<": "<<inDegree[node]<<endl;
+			}
+			cout<<endl;
+			
+			cout<<"outDegrees:"<<endl;
+			for(int node = 0; node < vertices; node ++)
+			{
+				cout<<node<<": "<<outDegree[node]<<endl;
+			}
+			cout<<endl;
+		}
+		
 };
 
 
@@ -31,5 +101,17 @@ int main(void)
 	freopen("output.txt", "w", stdout);
 	#endif
 	
+	int verticesLocal, edgesLocal;
+	cin>>verticesLocal>>edgesLocal;
+	vector<vector<int>> graphLocal(verticesLocal);
+	for(int i=0;i<edgesLocal;i++)
+	{
+		int start, end;
+		cin>>start>>end;
+		graphLocal[start].push_back(end);
+	}
+	EuleiranPathGraph* directedGraph = new EuleiranPathGraph(verticesLocal, edgesLocal, graphLocal);
+	directedGraph -> runScript();
 	
+	return 0; // return type is int
 }
