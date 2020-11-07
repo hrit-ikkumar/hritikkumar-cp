@@ -25,3 +25,4 @@ outDegrees:
 5: 2
 6: 1
 
+We can find the eulerian path in given graph..

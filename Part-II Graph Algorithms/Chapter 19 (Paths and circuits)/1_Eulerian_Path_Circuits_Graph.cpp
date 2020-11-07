@@ -37,9 +37,10 @@ class EuleiranPathGraph
 		{
 			calculateDegres(); // calculate all the indegress and outdegrees  of directed graph
 			printEverything(); // checking for in and out degree is correct or not?
-			if(checkWheaterWeCan FindEulerianPath())
+			if(checkWheaterWeCanFindEulerianPath())
 			{
 				// do something here
+				cout<<"We can find the eulerian path in given graph.."<<endl;
 			}
 			else
 			{
@@ -60,7 +61,26 @@ class EuleiranPathGraph
 			}
 		}
 		
-		bool checkWheaterWeCan
+		bool checkWheaterWeCanFindEulerianPath()
+		{
+			int inMinusOut = 0, outMinuxIn = 0;
+			for(int i=0;i<this->vertices;i++)
+			{
+				if( (this -> inDegree[i] - this->outDegree[i]) == 1) // first case when two of them is having difference 1
+					inMinusOut +=1;
+				else if( (this->outDegree[i] - this->inDegree[i]) == 1)
+					outMinuxIn += 1;
+				else if(abs(this->inDegree[i] - this->outDegree[i]) > 1) // more than 1 difference can't be accepted here
+				{
+					return false;
+				}
+			}
+			// either 0 or 1 could be the difference between two ins and outs
+			if( (inMinusOut == 0 && outMinuxIn == 0) ||
+				(inMinusOut == 1 && outMinuxIn == 1))
+				return true;
+			return false;
+		}
 		
 		void printEverything()
 		{
