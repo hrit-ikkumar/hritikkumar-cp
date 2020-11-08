@@ -25,4 +25,6 @@ outDegrees:
 5: 2
 6: 1
 
+START NODE: 2
 We can find the eulerian path in given graph..
+Eulerian Path: 2 5 2 3 6 5 1 2 0 1 4 5 

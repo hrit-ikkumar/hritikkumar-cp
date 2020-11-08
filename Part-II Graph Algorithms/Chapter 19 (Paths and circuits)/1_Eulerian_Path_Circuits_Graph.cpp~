@@ -21,7 +21,8 @@ class EuleiranPathGraph
 	public:
 		vector<vector<int>> graph;
 		vector<int> inDegree, outDegree;
-		int vertices, edges;
+		int vertices, edges,start_node=0;
+		list<int> eulerianPath;
 	public:
 		EuleiranPathGraph() {}
 		EuleiranPathGraph(int v, int e,vector<vector<int>> dirGraph)
@@ -40,13 +41,37 @@ class EuleiranPathGraph
 			if(checkWheaterWeCanFindEulerianPath())
 			{
 				// do something here
+				cout<<"START NODE: "<<start_node<<endl;
 				cout<<"We can find the eulerian path in given graph.."<<endl;
+				this->dfs(start_node); // run the dfs for eulerian path
+				
+				// condition for disconnected graph
+				if(eulerianPath.size() == edges + 1)
+				{
+					cout<<"Eulerian Path: ";
+					for(auto it:eulerianPath)
+						cout<<it<<" ";
+					cout<<endl;
+				}
+				else
+				{
+					cout<<"We didn't traverse all the edges. So, it does not contain eulerian path"<<endl;
+				}
 			}
 			else
 			{
 				cout<<"Can not find the eulerian path in given graph..."<<endl;
 				return;
 			}
+		}
+		
+		void dfs(int root)
+		{
+			while(outDegree[root] != 0)
+			{
+				dfs(graph[root][--outDegree[root]]);
+			}
+			eulerianPath.push_front(root);
 		}
 		
 		void calculateDegres()
@@ -69,7 +94,7 @@ class EuleiranPathGraph
 				if( (this -> inDegree[i] - this->outDegree[i]) == 1) // first case when two of them is having difference 1
 					inMinusOut +=1;
 				else if( (this->outDegree[i] - this->inDegree[i]) == 1)
-					outMinuxIn += 1;
+					outMinuxIn += 1, start_node = i;
 				else if(abs(this->inDegree[i] - this->outDegree[i]) > 1) // more than 1 difference can't be accepted here
 				{
 					return false;
@@ -79,6 +104,7 @@ class EuleiranPathGraph
 			if( (inMinusOut == 0 && outMinuxIn == 0) ||
 				(inMinusOut == 1 && outMinuxIn == 1))
 				return true;
+			start_node = 0;
 			return false;
 		}
 		
