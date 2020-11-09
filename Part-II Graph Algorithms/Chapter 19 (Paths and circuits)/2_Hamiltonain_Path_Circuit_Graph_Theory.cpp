@@ -73,6 +73,7 @@ class HamiltonianPathGraph
 				cout<<"HAMILTONIAN PATH: ";
 				for(int x:hamiltonianPath)
 					cout<<x<<" ";
+				cout<<hamiltonianPath[0];
 				cout<<endl;
 			}
 			else

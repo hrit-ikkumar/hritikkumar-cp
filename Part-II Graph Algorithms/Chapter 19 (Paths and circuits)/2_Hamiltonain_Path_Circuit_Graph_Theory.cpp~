@@ -27,6 +27,7 @@ class HamiltonianPathGraph
 		void runScript()
 		{
 			printEverything();
+			hamCycle();
 		}
 		
 		bool isSafe(int v, int pos)
