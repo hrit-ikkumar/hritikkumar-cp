@@ -38,8 +38,8 @@ class KnightsTour
 		{
 			chessBoard.resize(size, vector<int>(size, -1)); // initialize
 			
-			int sx = rand()%size;
-			int sy = rand()%size;
+			int sx = rand()%size,
+				  sy = rand()%size;
 			int x = sx, y = sy; // current points are same as initial points
 			chessBoard[x][y] = 1; // mark first move
 			
