@@ -37,13 +37,54 @@ class FordFulkersonGraph
 		
 		void runScript()
 		{
-			
+			if(true == true)
+			{
+				cout<<"There is a source path from source to sink: ";
+				
+			}
+			else
+			{
+				cout<<"There is not path from source to sink.";
+			}
 			
 			print_everything();
 		}
 		
+		bool bfs(int currSource, int currSink, vector<int> parent)
+		{
+			vector<bool> visited(this->vertices, false); // none of them visited yet
+			queue<int> q;
+			q.push_back(currSource);
+			visited[currSource] = true;
+			parent[currSource] = -1;
+			
+			while(!q.empty())
+			{
+				int currNode = q.front();
+				q.pop();
+				
+				for(int child: graph[currNode])
+				{
+					if(visited[child] == false)
+					{
+						q.push_back(child);
+						parent[child] = currNode;
+						visited[child] = true;
+					}
+				}
+			}
+			
+			return (visited[currSink] == true);
+		}
+		
+		int fordFulkersonAlgorithm()
+		{
+			
+		}
+		
 		void print_everything()
 		{
+			// hritikkumar
 			
 		}
 };
