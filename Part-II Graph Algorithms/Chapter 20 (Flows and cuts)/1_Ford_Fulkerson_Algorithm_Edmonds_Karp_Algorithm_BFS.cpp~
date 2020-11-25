@@ -7,13 +7,7 @@ using namespace std; // namespace created as std
 class FordFulkersonGraph
 {
 	public:
-		struct node
-		{
-			int flow =0, capacity = 0;
-			node(){}
-			node(int f, int c){flow = f, capacity = c;}
-		};
-		vector<vector<pair<int, node*>>> graph;
+		vector<vector<int>> graph, rGraph;
 		int source, sink;
 		int vertices, edges;
 	
@@ -25,36 +19,30 @@ class FordFulkersonGraph
 			this->sink = e;
 			this->vertices = v;
 			this->edges = edg;
-			graph.resize(g.size());
+			graph.resize(vertices, vector<int>(vertices, 0));
+			rGraph.resize(vertices, vector<int>(vertices, 0));
 			for(int  root= 0; root < (signed) g.size(); root ++)
 			{
 				for(auto child: g[root])
 				{
-					graph[root].push_back({child.first, new node(0, child.second)});
+					graph[root][child.first] = child.second;
+					rGraph[root][child.first] = child.second; // residual Graph
 				}
 			}
 		}
 		
 		void runScript()
 		{
-			if(true == true)
-			{
-				cout<<"There is a source path from source to sink: ";
-				
-			}
-			else
-			{
-				cout<<"There is not path from source to sink.";
-			}
+			cout<<"MAX FLOW: "<<fordFulkersonAlgorithm()<<endl;
 			
 			print_everything();
 		}
 		
-		bool bfs(int currSource, int currSink, vector<int> parent)
+		bool bfs(int currSource, int currSink, vector<int> &parent)
 		{
 			vector<bool> visited(this->vertices, false); // none of them visited yet
 			queue<int> q;
-			q.push_back(currSource);
+			q.push(currSource);
 			visited[currSource] = true;
 			parent[currSource] = -1;
 			
@@ -63,18 +51,43 @@ class FordFulkersonGraph
 				int currNode = q.front();
 				q.pop();
 				
-				for(int child: graph[currNode])
+				for(int v = 0; v < this->vertices; v++)
 				{
-					if(visited[child] == false)
+					if(visited[v] == false && rGraph[currNode][v] > 0)
 					{
-						q.push_back(child);
-						parent[child] = currNode;
-						visited[child] = true;
+						q.push(v);
+						parent[v] = currNode;
+						visited[v] = true;
 					}
 				}
 			}
 			
 			return (visited[currSink] == true);
+		}
+		
+		int fordFulkersonAlgorithm()
+		{
+			vector<int> parent(this->vertices,0);
+			int max_flow = 0;
+			int u,v;
+			while(bfs(source, sink, parent))
+			{
+				int path_flow = INT_MAX;
+				for(v = sink; v != source; v=parent[v])
+				{
+					u = parent[v];
+					path_flow = min(path_flow, rGraph[u][v]);
+				}
+				
+				for(v = sink; v!= source; v= parent[v])
+				{
+					u = parent[v];
+					rGraph[u][v] -= path_flow;
+					rGraph[v][u] += path_flow;
+				}
+				max_flow += path_flow;
+			}
+			return max_flow;
 		}
 		
 		void print_everything()
