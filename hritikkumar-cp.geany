@@ -20,16 +20,21 @@ indent_mode=2
 [project]
 name=hritikkumar-cp
 base_path=/home/hritikkumar/Documents/hritikkumar/hritikkumar-competitiveprogramming/hritikkumar-cp
+description=
+file_patterns=
 
 [long line marker]
 long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=0
+current_page=2
+FILE_NAME_0=3;None;0;EUTF-8;1;1;0;%2Fhome%2Fhritikkumar%2FDocuments%2Fhritikkumar%2Fhritikkumar-competitiveprogramming%2Fhritikkumar-cp%2FPart-III%20Advanced%20Topics%2FChapter%2022%20%28Combinatorics%29%2Finput.txt;0;4
+FILE_NAME_1=0;None;0;EUTF-8;1;1;0;%2Fhome%2Fhritikkumar%2FDocuments%2Fhritikkumar%2Fhritikkumar-competitiveprogramming%2Fhritikkumar-cp%2FPart-III%20Advanced%20Topics%2FChapter%2022%20%28Combinatorics%29%2Foutput.txt;0;4
+FILE_NAME_2=560;C++;0;EUTF-8;1;1;0;%2Fhome%2Fhritikkumar%2FDocuments%2Fhritikkumar%2Fhritikkumar-competitiveprogramming%2Fhritikkumar-cp%2FPart-III%20Advanced%20Topics%2FChapter%2022%20%28Combinatorics%29%2F1_Binomial_Coefficients.cpp;0;4
 
 [VTE]
-last_dir=/home/hritikkumar/Documents/hritikkumar/hritikkumar-competitiveprogramming
+last_dir=/home/hritikkumar/Documents/hritikkumar/hritikkumar-competitiveprogramming/hritikkumar-cp/Part-III Advanced Topics/Chapter 22 (Combinatorics)
 
 [prjorg]
 source_patterns=*.c;*.C;*.cpp;*.cxx;*.c++;*.cc;*.m;
@@ -38,3 +43,5 @@ ignored_dirs_patterns=.*;CVS;
 ignored_file_patterns=*.o;*.obj;*.a;*.lib;*.so;*.dll;*.lo;*.la;*.class;*.jar;*.pyc;*.mo;*.gmo;
 generate_tag_prefs=0
 external_dirs=
+
+[build-menu]
