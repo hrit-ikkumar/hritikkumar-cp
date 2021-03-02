@@ -17,6 +17,22 @@ class BinomialCoefficient
 			this->num = num;
 		}
 		
+		int kthCoefficient(int k)
+		{
+			// nCk = n!/ (n-k)! * k!
+			int C[k+1];
+			memset(C, 0, sizeof(C)); // setting values as default of 0
+			C[0] = 1;
+			for(int i=1;i<=num;i++)
+			{
+				for(int j=min(i,k); j>0; j--)
+				{
+					C[j] = C[j] + C[j-1];
+				}
+			}
+			return C[k];
+		}
+		
 		void print_everything()
 		{
 			// Do all the printing tasks
@@ -33,7 +49,10 @@ int main(void)
 	#endif
 	int n;
 	cin>>n;
+	int k;
+	cin>>k;
 	BinomialCoefficient * binomialCoefficient = new BinomialCoefficient(n);
 	binomialCoefficient->print_everything(); // tasking
+	cout<<"ANS: "<<binomialCoefficient->kthCoefficient(k)<<endl;
 	return 0; // return type is int 
 }

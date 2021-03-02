@@ -2,6 +2,44 @@
 
 using namespace std; // namespace created as std
 
+class BinomialCoefficient
+{
+	public:
+		int num;
+	
+	public:
+		BinomialCoefficient() 
+		{
+			// Do nothing
+		}
+		BinomialCoefficient(int num)
+		{
+			this->num = num;
+		}
+		
+		int kthCoefficient(int k)
+		{
+			// nCk = n!/ (n-k)! * k!
+			int C[k+1];
+			memset(C, 0, sizeof(C)); // setting values as default of 0
+			C[0] = 1;
+			for(int i=1;i<=num;i++)
+			{
+				for(int j=min(i,k); j>0; j--)
+				{
+					C[j] = C[j] + C[j-1];
+				}
+			}
+			return C[k];
+		}
+		
+		void print_everything()
+		{
+			// Do all the printing tasks
+			cout<<"NUM: "<<num<<endl;
+		}
+};
+
 int main(void)
 {
 	std::ios::sync_with_stdio(false); cin.tie(0); cout.tie(0); // fastio
@@ -9,7 +47,10 @@ int main(void)
 	freopen("input.txt", "r", stdin);
 	freopen("output.txt", "w",stdout);
 	#endif
+	int n;
+	cin>>n;
 	
-	
+	BinomialCoefficient * binomialCoefficient = new BinomialCoefficient(n);
+	binomialCoefficient->print_everything(); // tasking
 	return 0; // return type is int 
 }
