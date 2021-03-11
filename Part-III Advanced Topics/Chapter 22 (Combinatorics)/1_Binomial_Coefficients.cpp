@@ -17,6 +17,7 @@ class BinomialCoefficient
 			this->num = num;
 		}
 		
+		
 		int kthCoefficient(int k)
 		{
 			// nCk = n!/ (n-k)! * k!

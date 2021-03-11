@@ -49,8 +49,10 @@ int main(void)
 	#endif
 	int n;
 	cin>>n;
-	
+	int k;
+	cin>>k;
 	BinomialCoefficient * binomialCoefficient = new BinomialCoefficient(n);
 	binomialCoefficient->print_everything(); // tasking
+	cout<<"ANS: "<<binomialCoefficient->kthCoefficient(k)<<endl;
 	return 0; // return type is int 
 }
