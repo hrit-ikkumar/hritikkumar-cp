@@ -1,0 +1,8 @@
+SUM OF MATRICES:
+2 6 5 
+3 10 0 
+8 6 1 
+Multiplication OF MATRICES:
+31 40 2 
+3 9 0 
+8 6 0 
